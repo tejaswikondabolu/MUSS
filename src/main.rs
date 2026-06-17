@@ -4,7 +4,7 @@ mod heresy;
 use axum::{
     extract::{Path, Query, State},
     response::{Html, Json},
-    routing::{get, post},
+    routing::get,
     Router,
 };
 use serde::{Deserialize, Serialize};
@@ -41,7 +41,7 @@ async fn main() {
         .route("/", get(home))
         .route("/exhibit/:id", get(exhibit))
         .route("/heresy", get(heresy_page))
-        .route("/heresy/analyze", post(analyze_heresy))
+        .route("/heresy/analyze", get(analyze_heresy))
         .route("/pilgrimage", get(pilgrimage))
         .route("/pilgrimage/:id", get(pilgrimage_detail))
         .route("/relics", get(relics))
