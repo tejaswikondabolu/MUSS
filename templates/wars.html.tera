@@ -1,0 +1,41 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Religious Wars — Museum of Programming Religions{% endblock title %}
+
+{% block content %}
+<div class="page-header">
+    <pre class="ascii-art">
+╔═══════════════════════════════════════╗
+║                                       ║
+║   RELIGIOUS WARS                      ║
+║                                       ║
+╚═══════════════════════════════════════╝
+    </pre>
+    <p>Throughout software civilization, the religions have clashed over fundamental beliefs. These are the great conflicts that shaped the world of code.</p>
+</div>
+
+<div class="wars-list">
+    {% for war in wars %}
+    <div class="war-card">
+        <h2 class="war-title">{{ war.title }}</h2>
+        <div class="war-sides">
+            <div class="war-side">
+                <h3><a href="/exhibit/{{ war.side_a.id }}">{{ war.side_a.name }}</a></h3>
+                <p>"{{ war.side_a.position }}"</p>
+            </div>
+            <div class="war-vs">⚔️</div>
+            <div class="war-side">
+                <h3><a href="/exhibit/{{ war.side_b.id }}">{{ war.side_b.name }}</a></h3>
+                <p>"{{ war.side_b.position }}"</p>
+            </div>
+        </div>
+        <div class="war-description">
+            <p>{{ war.description }}</p>
+        </div>
+        <div class="war-casualties">
+            <p><strong>Casualties:</strong> {{ war.casualties }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

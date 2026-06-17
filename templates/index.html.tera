@@ -1,0 +1,166 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Museum of Programming Religions — Home{% endblock title %}
+
+{% block content %}
+<div class="hero">
+    <pre class="ascii-art">
+
+╔═══════════════════════════════════════════╗
+║                                           ║
+║   ███╗   ███╗██╗   ██╗███████╗███████╗   ║
+║   ████╗ ████║██║   ██║██╔════╝██╔════╝   ║
+║   ██╔████╔██║██║   ██║███████╗███████╗   ║
+║   ██║╚██╔╝██║██║   ██║╚════██║╚════██║   ║
+║   ██║ ╚═╝ ██║╚██████╔╝███████║███████║   ║
+║   ╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚══════╝   ║
+║                                           ║
+║   MUSEUM OF PROGRAMMING RELIGIONS         ║
+║                                           ║
+╚═══════════════════════════════════════════╝
+    </pre>
+    <p class="hero-subtitle">Where programming languages become religions,<br>compiler errors become heresy, and code tells stories.</p>
+    <div class="hero-cta">
+        <a href="#rotunda" class="cta-button">Enter the Rotunda →</a>
+        <a href="/heresy" class="cta-button cta-secondary">Heresy Chamber</a>
+    </div>
+</div>
+
+<div class="welcome-text">
+    <p>Welcome, traveler, to the Museum of Programming Religions.</p>
+    <p>Here we document the ancient faiths of the software civilization. Every language is a religion. Every feature is a doctrine. Every compiler error is an act of heresy.</p>
+    <p>Walk through our galleries. Learn the sacred laws. Witness the miracles. And if you dare — submit your code to the <a href="/heresy">Heresy Analysis Chamber</a>.</p>
+</div>
+
+<section id="rotunda" class="rotunda-section">
+    <div class="rotunda-hall">
+        <div class="hall-colonnade">
+            <div class="colonnade-shaft left-shaft">
+                <div class="shaft-fluting"></div>
+                <div class="shaft-fluting"></div>
+                <div class="shaft-fluting"></div>
+            </div>
+            <div class="colonnade-shaft right-shaft">
+                <div class="shaft-fluting"></div>
+                <div class="shaft-fluting"></div>
+                <div class="shaft-fluting"></div>
+            </div>
+        </div>
+        <div class="hall-vault">
+            <div class="vault-oculus">
+                <div class="oculus-rim"></div>
+                <div class="oculus-sky"></div>
+                <div class="oculus-ray r1"></div>
+                <div class="oculus-ray r2"></div>
+                <div class="oculus-ray r3"></div>
+                <div class="oculus-ray r4"></div>
+                <div class="oculus-ray r5"></div>
+                <div class="oculus-ray r6"></div>
+                <div class="oculus-ray r7"></div>
+                <div class="oculus-ray r8"></div>
+            </div>
+        </div>
+        <div class="hall-sconce left-sconce">✦</div>
+        <div class="hall-sconce right-sconce">✦</div>
+        <div class="hall-floor">
+            <div class="alcoves">
+                {% for religion in religions %}
+                {% if loop.index0 == 2 %}
+                <div class="rotunda-center">
+                    <div class="medallion-container">
+                        <span class="compass-n">N</span>
+                        <span class="compass-s">S</span>
+                        <span class="compass-e">E</span>
+                        <span class="compass-w">W</span>
+                        <div class="medallion-eye"></div>
+                    </div>
+                    <div class="center-beam"></div>
+                    <div class="rotunda-crown">◇</div>
+                    <h2 class="rotunda-grand-title">⟨ THE GRAND ROTUNDA ⟩</h2>
+                    <div class="title-divider">
+                        <span class="divider-line"></span>
+                        <span class="divider-diamond">◆</span>
+                        <span class="divider-line"></span>
+                    </div>
+                    <p class="rotunda-grand-subtitle">Four faiths enshrined in sacred halls — choose thy pilgrimage</p>
+                </div>
+                {% endif %}
+                <div class="alcove" style="--religion-color: {{ religion.color }};">
+                    <a href="/exhibit/{{ religion.id }}" class="alcove-link">
+                        <div class="alcove-arch">
+                            <span class="arch-stone"></span>
+                            <span class="arch-stone"></span>
+                            <span class="arch-stone"></span>
+                            <span class="arch-stone"></span>
+                            <span class="arch-stone keystone"></span>
+                        </div>
+                        <div class="alcove-stained-glass">
+                            <div class="stained-glass-lead">
+                                <div class="stained-glass-symbol">{{ religion.icon }}</div>
+                            </div>
+                            <h3 class="alcove-name">{{ religion.name }}</h3>
+                        </div>
+                        <div class="alcove-frieze">
+                            <div class="triglyph"></div>
+                            <span class="frieze-text">{{ religion.subtitle }}</span>
+                            <div class="triglyph"></div>
+                        </div>
+                        <div class="alcove-body-area">
+                            <div class="pillar left">
+                                <span class="pillar-base"></span>
+                                <span class="pillar-shaft"></span>
+                                <span class="pillar-capital"></span>
+                            </div>
+                            <div class="alcove-body">
+                                <p class="alcove-belief"><strong>Core Belief:</strong><br>{{ religion.core_belief }}</p>
+                                <p class="alcove-deity"><strong>Deity:</strong> {{ religion.deity }}</p>
+                                <p class="alcove-founded"><strong>Founded:</strong> {{ religion.founded }}</p>
+                                <p class="alcove-danger"><strong>Danger Level:</strong> {{ religion.danger_level }}</p>
+                            </div>
+                            <div class="pillar right">
+                                <span class="pillar-base"></span>
+                                <span class="pillar-shaft"></span>
+                                <span class="pillar-capital"></span>
+                            </div>
+                        </div>
+                        <div class="alcove-pedestal">
+                            <span class="pedestal-plaque">Enter {{ religion.name }} →</span>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features-section">
+    <h2 class="section-title">═══════════ Museum Galleries ═══════════</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🔍</div>
+            <h3>Heresy Detector</h3>
+            <p>Submit your code to the Heresy Analysis Chamber. Our Supreme Compiler will examine it for violations of sacred law.</p>
+            <a href="/heresy" class="feature-link">Enter the Chamber →</a>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🚶</div>
+            <h3>Pilgrimages</h3>
+            <p>Embark on guided journeys through the religions. Learn their ways through stories and exhibits.</p>
+            <a href="/pilgrimage" class="feature-link">Begin Journey →</a>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💎</div>
+            <h3>Holy Relics</h3>
+            <p>View the sacred artifacts of each religion. From the Ferris Statue to the Coercion Stone.</p>
+            <a href="/relics" class="feature-link">Browse Relics →</a>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⚔️</div>
+            <h3>Religious Wars</h3>
+            <p>Explore the great conflicts of software civilization. Rust vs C++. Python vs Java. And more.</p>
+            <a href="/wars" class="feature-link">Study Conflicts →</a>
+        </div>
+    </div>
+</section>
+{% endblock content %}

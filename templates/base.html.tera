@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Museum of Programming Religions{% endblock title %}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-inner">
+            <a href="/" class="nav-title">
+                <span class="nav-emblem">🏛️</span>
+                <span class="nav-title-text">Museum of Programming Religions</span>
+            </a>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/heresy" class="nav-link">Heresy Detector</a>
+                <a href="/pilgrimage" class="nav-link">Pilgrimages</a>
+                <a href="/relics" class="nav-link">Relics</a>
+                <a href="/wars" class="nav-link">Religious Wars</a>
+            </div>
+        </div>
+        <div class="nav-frieze"></div>
+    </nav>
+    <main class="main-content">
+        {% block content %}{% endblock content %}
+    </main>
+    <footer class="footer">
+        <div class="footer-columns">
+            <div class="footer-col">
+                <span class="footer-emblem">🏛️</span>
+                <p>Museum of Programming Religions</p>
+                <p class="footer-small">Where languages become legends.</p>
+            </div>
+            <div class="footer-col footer-links">
+                <a href="/">Home</a>
+                <a href="/heresy">Heresy Detector</a>
+                <a href="/pilgrimage">Pilgrimages</a>
+                <a href="/relics">Relics</a>
+                <a href="/wars">Religious Wars</a>
+            </div>
+        </div>
+        <p class="footer-small">All religions depicted are fictional. May the compiler be with you.</p>
+    </footer>
+</body>
+</html>

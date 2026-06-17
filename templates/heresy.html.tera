@@ -1,0 +1,155 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Heresy Detector — Museum of Programming Religions{% endblock title %}
+
+{% block content %}
+<div class="page-header">
+    <pre class="ascii-art">
+╔═══════════════════════════════════════╗
+║                                       ║
+║   HERESY ANALYSIS CHAMBER             ║
+║                                       ║
+╚═══════════════════════════════════════╝
+    </pre>
+    <p>Submit your Rust code to the Heresy Analysis Chamber. The Supreme Compiler will examine it for violations of sacred law and generate a detailed report.</p>
+</div>
+
+<div class="heresy-input-area">
+    <form id="heresy-form" class="heresy-form">
+        <label for="code-input">Paste your Rust code:</label>
+        <textarea id="code-input" name="code" rows="12" placeholder="fn main() {
+    let x = String::from(&quot;hello&quot;);
+    let y = x;
+    println!(&quot;{}&quot;, x);
+}"></textarea>
+        <button type="submit" class="cta-button analyze-btn">🔍 Analyze for Heresy</button>
+    </form>
+</div>
+
+<div id="loading" class="loading" style="display: none;">
+    <div class="loading-text">⚖️ The Supreme Compiler is examining your code...</div>
+    <div class="spinner"></div>
+</div>
+
+<div id="result" class="result-area" style="display: none;"></div>
+
+<div class="examples-section">
+    <h3>📋 Try These Examples</h3>
+    <div class="example-buttons">
+        <button class="example-btn" data-code='fn main() {
+    let x = String::from("hello");
+    let y = x;
+    println!("{}", x);
+}'>Ownership Violation (E0382)</button>
+        <button class="example-btn" data-code='fn main() {
+    let mut s = String::from("hello");
+    let r1 = &mut s;
+    let r2 = &s;
+    println!("{} {}", r1, r2);
+}'>Borrowing Violation (E0502)</button>
+        <button class="example-btn" data-code='fn main() {
+    let x = 5;
+    x = 10;
+    println!("{}", x);
+}'>Mutability Violation (E0384)</button>
+        <button class="example-btn" data-code='fn main() {
+    let x: i32 = "hello";
+    println!("{}", x);
+}'>Type Mismatch (E0308)</button>
+    </div>
+</div>
+
+<script>
+const form = document.getElementById('heresy-form');
+const codeInput = document.getElementById('code-input');
+const resultDiv = document.getElementById('result');
+const loadingDiv = document.getElementById('loading');
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const code = codeInput.value.trim();
+    if (!code) return;
+
+    loadingDiv.style.display = 'block';
+    resultDiv.style.display = 'none';
+    resultDiv.innerHTML = '';
+
+    try {
+        const resp = await fetch(`/heresy/analyze?code=${encodeURIComponent(code)}`);
+        const data = await resp.json();
+
+        loadingDiv.style.display = 'none';
+        resultDiv.style.display = 'block';
+
+        if (data.error) {
+            resultDiv.innerHTML = `<div class="error-msg">${data.error}</div>`;
+            return;
+        }
+
+        const report = data.report;
+
+        if (report.status === 'clean') {
+            let html = `<div class="heresy-clean">
+                <div class="clean-icon">✅</div>
+                <h2>No Heresy Detected</h2>
+                <p>${report.message}</p>`;
+            if (report.warnings && report.warnings.length > 0) {
+                html += `<div class="warnings"><h3>Minor Transgressions</h3>`;
+                report.warnings.forEach(w => { html += `<p>${w}</p>`; });
+                html += `</div>`;
+            }
+            html += `</div>`;
+            resultDiv.innerHTML = html;
+            return;
+        }
+
+        let html = `<div class="heresy-report">
+            <div class="report-header">
+                <div class="report-severity severity-${report.severity.toLowerCase()}">${report.severity}</div>
+                <h2>⚠ ${report.violation}</h2>
+            </div>
+            <div class="report-meta">
+                <p><strong>Religion:</strong> ${report.religion}</p>
+                <p><strong>Law Violated:</strong> ${report.law_violated}</p>
+                ${report.error_code ? `<p><strong>Error Code:</strong> error[${report.error_code}]</p>` : ''}
+                ${report.line ? `<p><strong>Location:</strong> line ${report.line}${report.column ? ', column ' + report.column : ''}</p>` : ''}
+            </div>
+            <div class="report-section">
+                <h3>📜 Explanation</h3>
+                <p>${report.explanation.replace(/\n/g, '<br>')}</p>
+            </div>
+            <div class="report-section">
+                <h3>🙏 Penance</h3>
+                <p>${report.penance}</p>
+            </div>
+            <div class="report-section narrative-section">
+                <h3>📖 The High Priest's Account (Level 3)</h3>
+                <p class="narrative-title"><strong>${report.narrative_title}</strong></p>
+                <p>${report.narrative_story.replace(/\n/g, '<br>')}</p>
+                <p class="narrative-verdict"><strong>Verdict:</strong> ${report.narrative_verdict}</p>
+            </div>`;
+
+        if (report.warnings && report.warnings.length > 0) {
+            html += `<div class="report-section warnings"><h3>📜 Additional Transgressions</h3>`;
+            report.warnings.forEach(w => { html += `<p>${w}</p>`; });
+            html += `</div>`;
+        }
+
+        html += `</div>`;
+        resultDiv.innerHTML = html;
+
+    } catch (err) {
+        loadingDiv.style.display = 'none';
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = `<div class="error-msg">Error communicating with the Supreme Compiler: ${err.message}</div>`;
+    }
+});
+
+document.querySelectorAll('.example-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        codeInput.value = btn.dataset.code;
+        form.dispatchEvent(new Event('submit'));
+    });
+});
+</script>
+{% endblock content %}
