@@ -1,0 +1,27 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Holy Relics — Museum of Programming Religions{% endblock title %}
+
+{% block content %}
+<div class="page-header">
+    <pre class="ascii-art">
+╔═══════════════════════════════════════╗
+║                                       ║
+║   HOLY RELICS                         ║
+║                                       ║
+╚═══════════════════════════════════════╝
+    </pre>
+    <p>Sacred artifacts from across the software civilizations. Each relic embodies a core concept of its religion.</p>
+</div>
+
+<div class="relics-all-grid">
+    {% for relic in relics %}
+    <div class="relic-full-card">
+        <h3>{{ relic.name }}</h3>
+        <p class="relic-religion">From: <a href="/exhibit/{{ relic.religion_id }}">{{ relic.religion_name }}</a></p>
+        <p class="relic-desc">{{ relic.description }}</p>
+        <p class="relic-power"><strong>Sacred Power:</strong> {{ relic.power }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

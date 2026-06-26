@@ -1,0 +1,94 @@
+{% extends "base.html.tera" %}
+
+{% block title %}{{ religion.name }} — Museum of Programming Religions{% endblock title %}
+
+{% block content %}
+<div class="exhibit-header" style="border-color: {{ religion.color }};">
+    <pre class="exhibit-ascii">
+╔═══════════════════════════════════════╗
+║                                       ║
+║   {{ religion.title }}               ║
+║                                       ║
+╚═══════════════════════════════════════╝
+    </pre>
+    <p class="exhibit-subtitle">{{ religion.subtitle }}</p>
+</div>
+
+<div class="exhibit-info-bar" style="border-left: 4px solid {{ religion.color }};">
+    <div class="info-item"><strong>Deity:</strong> {{ religion.deity }}</div>
+    <div class="info-item"><strong>Founded:</strong> {{ religion.founded }}</div>
+    <div class="info-item"><strong>Sacred Text:</strong> {{ religion.sacred_text }}</div>
+    <div class="info-item"><strong>Danger Level:</strong> {{ religion.danger_level }}</div>
+</div>
+
+<section class="exhibit-section">
+    <h2>📜 The Creation Myth</h2>
+    <div class="exhibit-text">
+        <p>{{ religion.history }}</p>
+    </div>
+</section>
+
+<section class="exhibit-section">
+    <h2>⚖️ Sacred Laws</h2>
+    <div class="commandments">
+        {% for cmd in religion.commandments %}
+        <div class="commandment-card">
+            <div class="cmd-text">"{{ cmd.text }}"</div>
+            <div class="cmd-meaning">{{ cmd.meaning }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="exhibit-section">
+    <h2>📖 Doctrines</h2>
+    <div class="doctrines">
+        {% for doctrine in religion.doctrines %}
+        <div class="doctrine-card">
+            <h3>{{ doctrine.name }}</h3>
+            <p>{{ doctrine.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="exhibit-section">
+    <h2>💎 Holy Relics</h2>
+    <div class="relics-grid">
+        {% for relic in religion.relics %}
+        <div class="relic-card">
+            <h3>{{ relic.name }}</h3>
+            <p class="relic-desc">{{ relic.description }}</p>
+            <p class="relic-power"><strong>Power:</strong> {{ relic.power }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="exhibit-section">
+    <h2>🌟 Sacred Miracles</h2>
+    <div class="miracles">
+        {% for miracle in religion.miracles %}
+        <div class="miracle-card">
+            <h3>Miracle: {{ miracle.title }}</h3>
+            <pre class="miracle-code">{{ miracle.code }}</pre>
+            <p class="miracle-explanation">{{ miracle.explanation }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="exhibit-section">
+    <h2>🚫 Forbidden Practices</h2>
+    <div class="forbidden-list">
+        {% for practice in religion.forbidden_practices %}
+        <div class="forbidden-item">{{ practice }}</div>
+        {% endfor %}
+    </div>
+</section>
+
+<div class="exhibit-nav">
+    <a href="/" class="nav-button">← Back to Museum</a>
+    <a href="/pilgrimage/{{ religion.id }}" class="nav-button">Start Pilgrimage →</a>
+</div>
+{% endblock content %}

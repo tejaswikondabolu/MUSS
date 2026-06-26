@@ -1,0 +1,202 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Which Programming Religion Are You? — Museum of Programming Religions{% endblock title %}
+
+{% block content %}
+<div class="page-header">
+    <pre class="ascii-art">
+╔═══════════════════════════════════════╗
+║                                       ║
+║   WHICH PROGRAMMING RELIGION          ║
+║   ARE YOU?                            ║
+║                                       ║
+╚═══════════════════════════════════════╝
+    </pre>
+    <p>Answer 7 questions to discover your programming soul. The quiz knows. The quiz always knows.</p>
+</div>
+
+<div id="quiz-start" class="quiz-start">
+    <div class="quiz-start-icon">🔮</div>
+    <h2>The Oracle Awaits...</h2>
+    <p>Your answers will reveal which programming religion you truly belong to. There are no wrong answers — only truths you haven't accepted yet.</p>
+    <button onclick="startQuiz()" class="cta-button">Begin the Revelation →</button>
+</div>
+
+<div id="quiz-container" class="quiz-container" style="display: none;">
+    <div class="quiz-progress" id="quiz-progress"></div>
+    <div class="quiz-card" id="quiz-card">
+        <div class="quiz-question" id="quiz-question"></div>
+        <div class="quiz-answers" id="quiz-answers"></div>
+    </div>
+    <div class="quiz-nav">
+        <button class="nav-button" id="prev-btn" onclick="prevQuestion()" style="visibility: hidden;">← Previous</button>
+        <span class="quiz-counter" id="quiz-counter"></span>
+        <button class="cta-button" id="next-btn" onclick="nextQuestion()">Next →</button>
+    </div>
+</div>
+
+<div id="quiz-result" class="quiz-result" style="display: none;">
+    <div class="result-reveal">
+        <div class="result-icon" id="result-icon"></div>
+        <h2 id="result-title" class="result-title"></h2>
+        <div class="result-color-bar" id="result-color-bar"></div>
+        <div class="result-traits" id="result-traits"></div>
+        <div class="result-description" id="result-description"></div>
+        <div class="result-weakness" id="result-weakness"></div>
+        <div class="result-quote" id="result-quote"></div>
+        <div class="result-actions">
+            <button onclick="restartQuiz()" class="cta-button cta-secondary">Take Again</button>
+            <a href="/exhibit/{{ results[0].id }}" class="cta-button" id="result-visit-btn">Visit Your Temple →</a>
+        </div>
+    </div>
+</div>
+
+<script>
+const questions = [
+    {% for q in questions %}
+    {
+        question: "{{ q.question }}",
+        answers: [
+            {% for a in q.answers %}
+            { text: "{{ a.text }}", scores: [{{ a.scores[0] }}, {{ a.scores[1] }}, {{ a.scores[2] }}, {{ a.scores[3] }}] },
+            {% endfor %}
+        ]
+    },
+    {% endfor %}
+];
+
+const results = [
+    {% for r in results %}
+    {
+        id: "{{ r.id }}",
+        title: "{{ r.title }}",
+        icon: "{{ r.icon }}",
+        traits: [{% for t in r.traits %}"{{ t }}"{% if not loop.last %}, {% endif %}{% endfor %}],
+        weakness: "{{ r.weakness }}",
+        color: "{{ r.color }}",
+        description: "{{ r.description }}",
+        patron_quote: "{{ r.patron_quote }}",
+    },
+    {% endfor %}
+];
+
+let currentQuestion = 0;
+let answers = Array(questions.length).fill(-1);
+
+function startQuiz() {
+    document.getElementById('quiz-start').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+    currentQuestion = 0;
+    renderQuestion();
+}
+
+function renderQuestion() {
+    const q = questions[currentQuestion];
+    document.getElementById('quiz-question').textContent = `Question ${currentQuestion + 1} of ${questions.length}: ${q.question}`;
+    document.getElementById('quiz-counter').textContent = `${currentQuestion + 1} / ${questions.length}`;
+    
+    const progress = document.getElementById('quiz-progress');
+    const pct = ((currentQuestion + 1) / questions.length) * 100;
+    progress.innerHTML = `<div class="progress-fill" style="width: ${pct}%"></div>`;
+
+    const answersDiv = document.getElementById('quiz-answers');
+    answersDiv.innerHTML = '';
+    q.answers.forEach((a, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-answer-btn';
+        if (answers[currentQuestion] === i) btn.classList.add('selected');
+        btn.textContent = a.text;
+        btn.onclick = () => selectAnswer(i);
+        answersDiv.appendChild(btn);
+    });
+
+    document.getElementById('prev-btn').style.visibility = currentQuestion === 0 ? 'hidden' : 'visible';
+    const nextBtn = document.getElementById('next-btn');
+    if (currentQuestion === questions.length - 1) {
+        nextBtn.textContent = 'See My Result →';
+    } else {
+        nextBtn.textContent = 'Next →';
+    }
+}
+
+function selectAnswer(idx) {
+    answers[currentQuestion] = idx;
+    document.querySelectorAll('.quiz-answer-btn').forEach((btn, i) => {
+        btn.classList.toggle('selected', i === idx);
+    });
+}
+
+function nextQuestion() {
+    if (answers[currentQuestion] === -1) return;
+    if (currentQuestion === questions.length - 1) {
+        computeResult();
+        return;
+    }
+    currentQuestion++;
+    renderQuestion();
+}
+
+function prevQuestion() {
+    if (currentQuestion === 0) return;
+    currentQuestion--;
+    renderQuestion();
+}
+
+function computeResult() {
+    const scores = [0, 0, 0, 0];
+    answers.forEach((aIdx) => {
+        if (aIdx === -1) return;
+        const q = questions[answers.indexOf(aIdx)];
+        // Find which question has this answer
+        for (let qi = 0; qi < questions.length; qi++) {
+            if (answers[qi] === -1) continue;
+            const a = questions[qi].answers[answers[qi]];
+            for (let s = 0; s < 4; s++) {
+                scores[s] += a.scores[s];
+            }
+        }
+        break;
+    });
+    // Recompute properly
+    for (let qi = 0; qi < questions.length; qi++) {
+        if (answers[qi] === -1) continue;
+        const a = questions[qi].answers[answers[qi]];
+        for (let s = 0; s < 4; s++) {
+            scores[s] += a.scores[s];
+        }
+    }
+
+    let maxIdx = 0;
+    for (let i = 1; i < 4; i++) {
+        if (scores[i] > scores[maxIdx]) maxIdx = i;
+    }
+
+    const r = results[maxIdx];
+    document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('quiz-result').style.display = 'block';
+    document.getElementById('result-icon').textContent = r.icon;
+    document.getElementById('result-title').textContent = `You are a ${r.title}`;
+    document.getElementById('result-color-bar').style.background = r.color;
+    document.getElementById('result-visit-btn').href = `/exhibit/${r.id}`;
+    document.getElementById('result-visit-btn').style.background = r.color;
+
+    const traitsDiv = document.getElementById('result-traits');
+    traitsDiv.innerHTML = '<h3>You value:</h3><div class="traits-list">';
+    r.traits.forEach(t => {
+        traitsDiv.innerHTML += `<span class="trait-badge">✓ ${t}</span>`;
+    });
+    traitsDiv.innerHTML += '</div>';
+
+    document.getElementById('result-description').innerHTML = `<p>${r.description}</p>`;
+    document.getElementById('result-weakness').innerHTML = `<div class="result-weakness-box"><strong>Weakness:</strong> ${r.weakness}</div>`;
+    document.getElementById('result-quote').innerHTML = `<div class="result-patron">${r.patron_quote}</div>`;
+}
+
+function restartQuiz() {
+    currentQuestion = 0;
+    answers = Array(questions.length).fill(-1);
+    document.getElementById('quiz-result').style.display = 'none';
+    document.getElementById('quiz-start').style.display = 'block';
+}
+</script>
+{% endblock content %}

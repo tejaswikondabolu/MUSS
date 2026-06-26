@@ -1,0 +1,18 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Exhibit Not Found — Museum of Programming Religions{% endblock title %}
+
+{% block content %}
+<div class="page-header">
+    <pre class="ascii-art">
+╔═══════════════════════════════════════╗
+║                                       ║
+║   EXHIBIT NOT FOUND                   ║
+║                                       ║
+╚═══════════════════════════════════════╝
+    </pre>
+    <p>The exhibit "{{ religion_id }}" does not exist in our museum.</p>
+    <p>Perhaps this religion has yet to be discovered by the software civilization.</p>
+    <a href="/" class="cta-button">Return to Museum Entrance</a>
+</div>
+{% endblock content %}

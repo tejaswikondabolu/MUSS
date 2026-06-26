@@ -1,0 +1,35 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Pilgrimages — Museum of Programming Religions{% endblock title %}
+
+{% block content %}
+<div class="page-header">
+    <pre class="ascii-art">
+╔═══════════════════════════════════════╗
+║                                       ║
+║   PILGRIMAGES                         ║
+║                                       ║
+╚═══════════════════════════════════════╝
+    </pre>
+    <p>Embark on a guided journey through the religions of software civilization. Each pilgrimage teaches a language's core concepts through stories, exhibits, and sacred rituals.</p>
+</div>
+
+<div class="pilgrimage-list">
+    {% for religion in religions %}
+    <div class="pilgrimage-card" style="--religion-color: {{ religion.color }};">
+        <div class="pilgrimage-header" style="background: {{ religion.color }};">
+            <h3>{{ religion.name }}</h3>
+        </div>
+        <div class="pilgrimage-body">
+            <p><strong>Core Belief:</strong> {{ religion.core_belief }}</p>
+            <p><strong>Duration:</strong> One reading</p>
+            <p><strong>Difficulty:</strong> {{ religion.danger_level }}</p>
+            <p class="pilgrimage-desc">Walk through the halls of {{ religion.name }}. Learn about its founding, its sacred laws, its doctrines, and its miracles. A complete guided tour of this programming religion.</p>
+        </div>
+        <div class="pilgrimage-footer">
+            <a href="/pilgrimage/{{ religion.id }}" class="cta-button" style="background: {{ religion.color }};">Begin Pilgrimage →</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

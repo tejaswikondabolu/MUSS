@@ -1,0 +1,99 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Pilgrimage: {{ religion.name }} — Museum of Programming Religions{% endblock title %}
+
+{% block content %}
+<div class="page-header" style="border-color: {{ religion.color }};">
+    <pre class="ascii-art">
+╔═══════════════════════════════════════╗
+║                                       ║
+║   PILGRIMAGE: {{ religion.title }}
+║                                       ║
+╚═══════════════════════════════════════╝
+    </pre>
+</div>
+
+<div class="pilgrimage-progress">
+    <div class="progress-step active">📜 Creation Myth</div>
+    <div class="progress-step active">⚖️ Sacred Laws</div>
+    <div class="progress-step active">📖 Doctrines</div>
+    <div class="progress-step active">💎 Relics</div>
+    <div class="progress-step active">🌟 Miracles</div>
+</div>
+
+<div class="pilgrimage-content">
+    <div class="pilgrimage-chapter">
+        <h2>Chapter 1: The Creation Myth</h2>
+        <div class="chapter-text">
+            <p>{{ religion.history }}</p>
+        </div>
+        <div class="chapter-reflection">
+            <p><em>Reflection: Every religion has an origin story. {{ religion.name }}'s story begins with a problem that needed solving — and a creator who had a vision.</em></p>
+        </div>
+    </div>
+
+    <div class="pilgrimage-chapter">
+        <h2>Chapter 2: The Sacred Laws</h2>
+        <p>These are the commandments that every follower must obey. Breaking them is heresy.</p>
+        <div class="commandments">
+            {% for cmd in religion.commandments %}
+            <div class="commandment-card">
+                <div class="cmd-text">"{{ cmd.text }}"</div>
+                <div class="cmd-meaning">{{ cmd.meaning }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="pilgrimage-chapter">
+        <h2>Chapter 3: The Doctrines</h2>
+        <p>The theological foundations of {{ religion.name }}. These doctrines define how the faithful write code.</p>
+        <div class="doctrines">
+            {% for doctrine in religion.doctrines %}
+            <div class="doctrine-card">
+                <h3>{{ doctrine.name }}</h3>
+                <p>{{ doctrine.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="pilgrimage-chapter">
+        <h2>Chapter 4: Holy Relics</h2>
+        <p>Sacred artifacts from the history of {{ religion.name }}.</p>
+        <div class="relics-grid">
+            {% for relic in religion.relics %}
+            <div class="relic-card">
+                <h3>{{ relic.name }}</h3>
+                <p class="relic-desc">{{ relic.description }}</p>
+                <p class="relic-power"><strong>Power:</strong> {{ relic.power }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="pilgrimage-chapter">
+        <h2>Chapter 5: Sacred Miracles</h2>
+        <p>Wondrous events in {{ religion.name }} that demonstrate the power of its design.</p>
+        <div class="miracles">
+            {% for miracle in religion.miracles %}
+            <div class="miracle-card">
+                <h3>{{ miracle.title }}</h3>
+                <pre class="miracle-code">{{ miracle.code }}</pre>
+                <p class="miracle-explanation">{{ miracle.explanation }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="pilgrimage-complete">
+    <h3>🏁 Pilgrimage Complete</h3>
+    <p>You have completed the pilgrimage through {{ religion.name }}. You now understand its beliefs, its laws, and its miracles.</p>
+    <div class="pilgrimage-nav">
+        <a href="/pilgrimage" class="nav-button">← All Pilgrimages</a>
+        <a href="/exhibit/{{ religion.id }}" class="nav-button">Visit Exhibit →</a>
+        <a href="/heresy" class="nav-button">Test Your Knowledge →</a>
+    </div>
+</div>
+{% endblock content %}

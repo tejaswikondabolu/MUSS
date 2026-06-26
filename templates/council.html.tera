@@ -1,0 +1,105 @@
+{% extends "base.html.tera" %}
+
+{% block title %}Council of Languages — Museum of Programming Religions{% endblock title %}
+
+{% block content %}
+<div class="page-header">
+    <pre class="ascii-art">
+╔═══════════════════════════════════════╗
+║                                       ║
+║   THE COUNCIL OF LANGUAGES            ║
+║                                       ║
+╚═══════════════════════════════════════╝
+    </pre>
+    <p>Four ancient beings sit in eternal deliberation. Ask a question, and they will answer — each according to their nature.</p>
+</div>
+
+<div class="council-chamber">
+    <div class="council-members">
+        {% for member in members %}
+        <div class="council-member-card" style="--member-color: {{ member.color }};">
+            <div class="member-icon">{{ member.icon }}</div>
+            <div class="member-name">{{ member.name }}</div>
+            <div class="member-title">{{ member.title }}</div>
+            <div class="member-tag">{{ member.personality }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="council-oracle">
+        <h2>🗣️ Pose Your Question</h2>
+        <p>The Council will debate any topic. Ask about inheritance, null, errors, performance — or anything else.</p>
+        <div class="council-input-area">
+            <input type="text" id="council-question" class="council-input" placeholder="e.g. Should I use inheritance?" onkeydown="if(event.key==='Enter') askCouncil()">
+            <button onclick="askCouncil()" class="cta-button">Ask the Council →</button>
+        </div>
+        <div class="council-examples">
+            <button class="example-btn" onclick="setQuestion('Should I use inheritance?')">Inheritance</button>
+            <button class="example-btn" onclick="setQuestion('How do I handle null?')">Null</button>
+            <button class="example-btn" onclick="setQuestion('What about error handling?')">Errors</button>
+            <button class="example-btn" onclick="setQuestion('How do I make it fast?')">Performance</button>
+            <button class="example-btn" onclick="setQuestion('How should I learn programming?')">Beginner Advice</button>
+            <button class="example-btn" onclick="setQuestion('What about concurrency?')">Concurrency</button>
+        </div>
+    </div>
+
+    <div id="council-loading" class="council-loading" style="display: none;">
+        <div class="loading-text">⚖️ The Council is deliberating...</div>
+        <div class="spinner"></div>
+    </div>
+
+    <div id="council-debate" class="council-debate" style="display: none;">
+        <h2 class="debate-header">⚖️ The Council's Verdict</h2>
+        <div id="council-responses"></div>
+    </div>
+</div>
+
+<script>
+async function askCouncil() {
+    const input = document.getElementById('council-question');
+    const question = input.value.trim();
+    if (!question) return;
+
+    document.getElementById('council-loading').style.display = 'block';
+    document.getElementById('council-debate').style.display = 'none';
+
+    try {
+        const resp = await fetch(`/council/ask?question=${encodeURIComponent(question)}`);
+        const data = await resp.json();
+
+        document.getElementById('council-loading').style.display = 'none';
+        document.getElementById('council-debate').style.display = 'block';
+
+        const responsesDiv = document.getElementById('council-responses');
+        responsesDiv.innerHTML = `<div class="debate-question">"${question}"</div>`;
+
+        data.forEach(r => {
+            responsesDiv.innerHTML += `
+                <div class="council-response" style="--member-color: ${r.member.color};">
+                    <div class="response-header">
+                        <span class="response-icon">${r.member.icon}</span>
+                        <div class="response-meta">
+                            <span class="response-name">${r.member.name}</span>
+                            <span class="response-title">${r.member.title}</span>
+                        </div>
+                    </div>
+                    <div class="response-text">${r.response}</div>
+                </div>
+            `;
+        });
+
+        responsesDiv.innerHTML += `<div class="debate-closing">The Council has spoken. Seek wisdom in their words — or ignore them at your peril.</div>`;
+
+    } catch (err) {
+        document.getElementById('council-loading').style.display = 'none';
+        document.getElementById('council-debate').style.display = 'block';
+        document.getElementById('council-responses').innerHTML = `<div class="error-msg">The Council could not convene: ${err.message}</div>`;
+    }
+}
+
+function setQuestion(text) {
+    document.getElementById('council-question').value = text;
+    askCouncil();
+}
+</script>
+{% endblock content %}
