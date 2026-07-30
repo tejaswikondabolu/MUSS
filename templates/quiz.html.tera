@@ -1,25 +1,24 @@
 {% extends "base.html.tera" %}
 
-{% block title %}Which Programming Religion Are You? — Museum of Programming Religions{% endblock title %}
+{% block title %}The Sorting Hat — Hogwarts School of Witchcraft & Programming{% endblock title %}
 
 {% block content %}
 <div class="page-header">
     <pre class="ascii-art">
 ╔═══════════════════════════════════════╗
 ║                                       ║
-║   WHICH PROGRAMMING RELIGION          ║
-║   ARE YOU?                            ║
+║   THE SORTING HAT                     ║
 ║                                       ║
 ╚═══════════════════════════════════════╝
     </pre>
-    <p>Answer 7 questions to discover your programming soul. The quiz knows. The quiz always knows.</p>
+    <p>Answer 7 questions to discover which Hogwarts House your soul belongs to. The Hat knows. The Hat always knows.</p>
 </div>
 
 <div id="quiz-start" class="quiz-start">
-    <div class="quiz-start-icon">🔮</div>
-    <h2>The Oracle Awaits...</h2>
-    <p>Your answers will reveal which programming religion you truly belong to. There are no wrong answers — only truths you haven't accepted yet.</p>
-    <button onclick="startQuiz()" class="cta-button">Begin the Revelation →</button>
+    <div class="quiz-start-icon">🎩</div>
+    <h2>The Sorting Hat Awaits...</h2>
+    <p>Your answers will reveal which Hogwarts House you truly belong to. There are no wrong answers — only truths you haven't accepted yet.</p>
+    <button onclick="startQuiz()" class="cta-button">Don the Sorting Hat →</button>
 </div>
 
 <div id="quiz-container" class="quiz-container" style="display: none;">
@@ -44,9 +43,10 @@
         <div class="result-description" id="result-description"></div>
         <div class="result-weakness" id="result-weakness"></div>
         <div class="result-quote" id="result-quote"></div>
+        <p class="sorting-hat-words">🎩 "Better be... <span id="result-house-name">your house</span>!"</p>
         <div class="result-actions">
-            <button onclick="restartQuiz()" class="cta-button cta-secondary">Take Again</button>
-            <a href="/exhibit/{{ results[0].id }}" class="cta-button" id="result-visit-btn">Visit Your Temple →</a>
+            <button onclick="restartQuiz()" class="cta-button cta-secondary">Sort Again</button>
+            <a href="/exhibit/{{ results[0].id }}" class="cta-button" id="result-visit-btn">Visit Your Common Room →</a>
         </div>
     </div>
 </div>
@@ -113,7 +113,7 @@ function renderQuestion() {
     document.getElementById('prev-btn').style.visibility = currentQuestion === 0 ? 'hidden' : 'visible';
     const nextBtn = document.getElementById('next-btn');
     if (currentQuestion === questions.length - 1) {
-        nextBtn.textContent = 'See My Result →';
+        nextBtn.textContent = 'Hear the Hat\'s Verdict →';
     } else {
         nextBtn.textContent = 'Next →';
     }
@@ -144,20 +144,6 @@ function prevQuestion() {
 
 function computeResult() {
     const scores = [0, 0, 0, 0];
-    answers.forEach((aIdx) => {
-        if (aIdx === -1) return;
-        const q = questions[answers.indexOf(aIdx)];
-        // Find which question has this answer
-        for (let qi = 0; qi < questions.length; qi++) {
-            if (answers[qi] === -1) continue;
-            const a = questions[qi].answers[answers[qi]];
-            for (let s = 0; s < 4; s++) {
-                scores[s] += a.scores[s];
-            }
-        }
-        break;
-    });
-    // Recompute properly
     for (let qi = 0; qi < questions.length; qi++) {
         if (answers[qi] === -1) continue;
         const a = questions[qi].answers[answers[qi]];
@@ -179,6 +165,9 @@ function computeResult() {
     document.getElementById('result-color-bar').style.background = r.color;
     document.getElementById('result-visit-btn').href = `/exhibit/${r.id}`;
     document.getElementById('result-visit-btn').style.background = r.color;
+
+    const houseName = r.title.split('—')[0].trim();
+    document.getElementById('result-house-name').textContent = houseName;
 
     const traitsDiv = document.getElementById('result-traits');
     traitsDiv.innerHTML = '<h3>You value:</h3><div class="traits-list">';

@@ -1,6 +1,6 @@
 {% extends "base.html.tera" %}
 
-{% block title %}Museum of Programming Religions — Home{% endblock title %}
+{% block title %}Hogwarts School of Witchcraft & Programming — Home{% endblock title %}
 
 {% block content %}
 <div class="hero">
@@ -8,28 +8,29 @@
 
 ╔═══════════════════════════════════════════╗
 ║                                           ║
-║   ███╗   ███╗██╗   ██╗███████╗███████╗   ║
-║   ████╗ ████║██║   ██║██╔════╝██╔════╝   ║
-║   ██╔████╔██║██║   ██║███████╗███████╗   ║
-║   ██║╚██╔╝██║██║   ██║╚════██║╚════██║   ║
-║   ██║ ╚═╝ ██║╚██████╔╝███████║███████║   ║
-║   ╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚══════╝   ║
+║   ██╗  ██╗ ██████╗  ██████╗ ██╗    ██╗   ║
+║   ██║  ██║██╔═══██╗██╔═══██╗██║    ██║   ║
+║   ███████║██║   ██║██║   ██║██║ █╗ ██║   ║
+║   ██╔══██║██║   ██║██║   ██║██║███╗██║   ║
+║   ██║  ██║╚██████╔╝╚██████╔╝╚███╔███╔╝   ║
+║   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝  ╚══╝╚══╝    ║
 ║                                           ║
-║   MUSEUM OF PROGRAMMING RELIGIONS         ║
+║   HOGWARTS SCHOOL OF WITCHCRAFT           ║
+║   & PROGRAMMING                           ║
 ║                                           ║
 ╚═══════════════════════════════════════════╝
     </pre>
-    <p class="hero-subtitle">Where programming languages become religions,<br>compiler errors become heresy, and code tells stories.</p>
+    <p class="hero-subtitle">Where programming languages become houses,<br>compiler errors become forbidden spells, and code tells magical stories.</p>
     <div class="hero-cta">
-        <a href="#rotunda" class="cta-button">Enter the Rotunda →</a>
+        <a href="#rotunda" class="cta-button">Enter the Great Hall →</a>
         <a href="/heresy" class="cta-button cta-secondary">Heresy Chamber</a>
     </div>
 </div>
 
 <div class="welcome-text">
-    <p>Welcome, traveler, to the Museum of Programming Religions.</p>
-    <p>Here we document the ancient faiths of the software civilization. Every language is a religion. Every feature is a doctrine. Every compiler error is an act of heresy.</p>
-    <p>Walk through our galleries. Learn the sacred laws. Witness the miracles. And if you dare — submit your code to the <a href="/heresy">Heresy Analysis Chamber</a>.</p>
+    <p>Welcome, young witch or wizard, to Hogwarts School of Witchcraft & Programming.</p>
+    <p>Here we study the ancient magical languages of the software civilization. Every programming language is a house. Every feature is a spell. Every compiler error is a misfired incantation.</p>
+    <p>Walk through our enchanted corridors. Learn the sacred incantations. Witness the magical artifacts. And if you dare — submit your code to the <a href="/heresy">Heresy Analysis Chamber</a> for judgment by the Sorting Hat.</p>
 </div>
 
 <section id="rotunda" class="rotunda-section">
@@ -76,13 +77,13 @@
                     </div>
                     <div class="center-beam"></div>
                     <div class="rotunda-crown">◇</div>
-                    <h2 class="rotunda-grand-title">⟨ THE GRAND ROTUNDA ⟩</h2>
+                    <h2 class="rotunda-grand-title">⟨ THE FOUR HOUSES ⟩</h2>
                     <div class="title-divider">
                         <span class="divider-line"></span>
                         <span class="divider-diamond">◆</span>
                         <span class="divider-line"></span>
                     </div>
-                    <p class="rotunda-grand-subtitle">Four faiths enshrined in sacred halls — choose thy pilgrimage</p>
+                    <p class="rotunda-grand-subtitle">Four houses enshrined in the Castle — the Sorting Hat awaits thy choice</p>
                 </div>
                 {% endif %}
                 <div class="alcove" style="--religion-color: {{ religion.color }};">
@@ -102,7 +103,7 @@
                         </div>
                         <div class="alcove-frieze">
                             <div class="triglyph"></div>
-                            <span class="frieze-text">{{ religion.subtitle }}</span>
+                            <span class="frieze-text">{{ religion.house }} · {{ religion.subtitle }}</span>
                             <div class="triglyph"></div>
                         </div>
                         <div class="alcove-body-area">
@@ -112,10 +113,10 @@
                                 <span class="pillar-capital"></span>
                             </div>
                             <div class="alcove-body">
-                                <p class="alcove-belief"><strong>Core Belief:</strong><br>{{ religion.core_belief }}</p>
-                                <p class="alcove-deity"><strong>Deity:</strong> {{ religion.deity }}</p>
+                                <p class="alcove-belief"><strong>Core Spell:</strong><br>{{ religion.core_belief }}</p>
+                                <p class="alcove-deity"><strong>Founder:</strong> {{ religion.deity }}</p>
                                 <p class="alcove-founded"><strong>Founded:</strong> {{ religion.founded }}</p>
-                                <p class="alcove-danger"><strong>Danger Level:</strong> {{ religion.danger_level }}</p>
+                                <p class="alcove-danger"><strong>House Color:</strong> <span style="color: {{ religion.house_color }};">⬤</span> {{ religion.house }}</p>
                             </div>
                             <div class="pillar right">
                                 <span class="pillar-base"></span>
@@ -124,7 +125,7 @@
                             </div>
                         </div>
                         <div class="alcove-pedestal">
-                            <span class="pedestal-plaque">Enter {{ religion.name }} →</span>
+                            <span class="pedestal-plaque">Visit {{ religion.house }} →</span>
                         </div>
                     </a>
                 </div>
@@ -135,30 +136,30 @@
 </section>
 
 <section class="features-section">
-    <h2 class="section-title">═══════════ Museum Galleries ═══════════</h2>
+    <h2 class="section-title">═══════════ Hogwarts Corridors ═══════════</h2>
     <div class="features-grid">
         <div class="feature-card">
             <div class="feature-icon">🔍</div>
             <h3>Heresy Detector</h3>
-            <p>Submit your code to the Heresy Analysis Chamber. Our Supreme Compiler will examine it for violations of sacred law.</p>
+            <p>Submit your code to the Heresy Analysis Chamber. The Sorting Hat will examine it for violations of magical law.</p>
             <a href="/heresy" class="feature-link">Enter the Chamber →</a>
         </div>
         <div class="feature-card">
             <div class="feature-icon">🚶</div>
             <h3>Pilgrimages</h3>
-            <p>Embark on guided journeys through the religions. Learn their ways through stories and exhibits.</p>
+            <p>Embark on guided journeys through the houses. Learn their spells and histories through enchanted exhibits.</p>
             <a href="/pilgrimage" class="feature-link">Begin Journey →</a>
         </div>
         <div class="feature-card">
             <div class="feature-icon">💎</div>
-            <h3>Holy Relics</h3>
-            <p>View the sacred artifacts of each religion. From the Ferris Statue to the Coercion Stone.</p>
+            <h3>Magical Relics</h3>
+            <p>View the sacred artifacts of each house. From the Sword of Gryffindor to the Coercion Stone.</p>
             <a href="/relics" class="feature-link">Browse Relics →</a>
         </div>
         <div class="feature-card">
             <div class="feature-icon">⚔️</div>
-            <h3>Religious Wars</h3>
-            <p>Explore the great conflicts of software civilization. Rust vs C++. Python vs Java. And more.</p>
+            <h3>Magical Wars</h3>
+            <p>Explore the great conflicts of software wizardry. Gryffindor vs Slytherin. Ravenclaw vs Hufflepuff. And more.</p>
             <a href="/wars" class="feature-link">Study Conflicts →</a>
         </div>
     </div>

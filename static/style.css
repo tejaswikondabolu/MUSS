@@ -2327,3 +2327,22 @@ body {
         height: 28px;
     }
 }
+
+/* ===== SORTING HAT / HOUSES ===== */
+.sorting-hat-words {
+    font-size: 1.2rem;
+    color: #f0c040;
+    font-style: italic;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.sorting-hat-words span {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* House color accents for pedestal borders */
+.alcove[style*="--religion-color: #DE3E35"] .pedestal-plaque {
+    border-color: #740001;
+}

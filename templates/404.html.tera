@@ -1,6 +1,6 @@
 {% extends "base.html.tera" %}
 
-{% block title %}Exhibit Not Found — Museum of Programming Religions{% endblock title %}
+{% block title %}Exhibit Not Found — Hogwarts School of Witchcraft & Programming{% endblock title %}
 
 {% block content %}
 <div class="page-header">
@@ -11,8 +11,8 @@
 ║                                       ║
 ╚═══════════════════════════════════════╝
     </pre>
-    <p>The exhibit "{{ religion_id }}" does not exist in our museum.</p>
-    <p>Perhaps this religion has yet to be discovered by the software civilization.</p>
-    <a href="/" class="cta-button">Return to Museum Entrance</a>
+    <p>The house "{{ religion_id }}" does not exist in our school.</p>
+    <p>Perhaps this magical language is taught at a different wizarding institution.</p>
+    <a href="/" class="cta-button">Return to the Great Hall</a>
 </div>
 {% endblock content %}

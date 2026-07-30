@@ -1,6 +1,6 @@
 {% extends "base.html.tera" %}
 
-{% block title %}{{ religion.name }} — Museum of Programming Religions{% endblock title %}
+{% block title %}{{ religion.name }} — Hogwarts School of Witchcraft & Programming{% endblock title %}
 
 {% block content %}
 <div class="exhibit-header" style="border-color: {{ religion.color }};">
@@ -11,7 +11,7 @@
 ║                                       ║
 ╚═══════════════════════════════════════╝
     </pre>
-    <p class="exhibit-subtitle">{{ religion.subtitle }}</p>
+    <p class="exhibit-subtitle">{{ religion.house }} — {{ religion.subtitle }}</p>
 </div>
 
 <div class="exhibit-info-bar" style="border-left: 4px solid {{ religion.color }};">
@@ -19,10 +19,11 @@
     <div class="info-item"><strong>Founded:</strong> {{ religion.founded }}</div>
     <div class="info-item"><strong>Sacred Text:</strong> {{ religion.sacred_text }}</div>
     <div class="info-item"><strong>Danger Level:</strong> {{ religion.danger_level }}</div>
+    <div class="info-item"><strong>House:</strong> <span style="color: {{ religion.house_color }};">⬤</span> {{ religion.house }}</div>
 </div>
 
 <section class="exhibit-section">
-    <h2>📜 The Creation Myth</h2>
+    <h2>📜 The Founding Myth</h2>
     <div class="exhibit-text">
         <p>{{ religion.history }}</p>
     </div>

@@ -14,39 +14,39 @@ pub struct CouncilMember {
 pub static MEMBERS: [CouncilMember; 4] = [
     CouncilMember {
         id: "rust",
-        name: "Bishop Ferris",
-        title: "Guardian of Memory Safety",
-        icon: "🦀",
-        color: "#DE3E35",
-        personality: "Earnest, principled, slightly condescending about memory safety",
-        expertise: "Ownership, borrowing, lifetimes, zero-cost abstractions",
+        name: "Hermione Granger",
+        title: "Prefect of Memory Safety & Magical Law",
+        icon: "📚",
+        color: "#740001",
+        personality: "Brilliant, precise, mildly insufferable about being right",
+        expertise: "Ownership theory, borrowing protocols, wand safety, all 12 uses of dragon's blood",
     },
     CouncilMember {
         id: "python",
-        name: "Monk Guido",
-        title: "Keeper of Readability",
-        icon: "🐍",
-        color: "#2E8B57",
-        personality: "Patient, philosophical, insists on one obvious way",
-        expertise: "Readability, simplicity, batteries-included philosophy",
-    },
-    CouncilMember {
-        id: "javascript",
-        name: "Trickster JS",
-        title: "Agent of Chaos",
-        icon: "⚡",
-        color: "#F7DF1E",
-        personality: "Unpredictable, sarcastic, always right eventually",
-        expertise: "Coercion, closures, event loop, prototype chain",
+        name: "Professor Severus Snape",
+        title: "Master of Potions & Practical Incantations",
+        icon: "⚗️",
+        color: "#1A472A",
+        personality: "Profound, bitter, powerful, tolerates no foolishness",
+        expertise: "Potion-brewing (pipeline design), occlumency (encapsulation), the Dark Arts (metaprogramming), Legilimency (introspection)",
     },
     CouncilMember {
         id: "cpp",
-        name: "Emperor C++",
-        title: "Ruler of All Hardware",
-        icon: "⚙️",
-        color: "#00599C",
-        personality: "Ancient, powerful, verbose, references 1985 constantly",
-        expertise: "Templates, manual memory, multiple inheritance, undefined behavior",
+        name: "Luna Lovegood",
+        title: "Seer of Ancient Standards & Arcane Templates",
+        icon: "🔮",
+        color: "#2A4B8C",
+        personality: "Dreamy, sees Nargles in the type system, always right in ways nobody understands",
+        expertise: "Template metaprogramming, Crumple-Horned Snorkack traversal, undefined behaviour spotting, the Wrackspurt allocator",
+    },
+    CouncilMember {
+        id: "javascript",
+        name: "Cedric Diggory",
+        title: "Hufflepuff Champion of the Web & Fair Play",
+        icon: "🦡",
+        color: "#FFDB00",
+        personality: "Kind, talented, dedicated, always plays fair",
+        expertise: "Event loop mastery, promise chaining, DOM transfiguration, Triwizard-level debugging",
     },
 ];
 
@@ -55,19 +55,19 @@ pub fn get_debate(question: &str) -> Vec<CouncilResponse> {
     vec![
         CouncilResponse {
             member: &MEMBERS[0],
-            response: bishop_responds(&q),
+            response: hermione_responds(&q),
         },
         CouncilResponse {
             member: &MEMBERS[1],
-            response: monk_responds(&q),
+            response: snape_responds(&q),
         },
         CouncilResponse {
             member: &MEMBERS[2],
-            response: trickster_responds(&q),
+            response: luna_responds(&q),
         },
         CouncilResponse {
             member: &MEMBERS[3],
-            response: emperor_responds(&q),
+            response: cedric_responds(&q),
         },
     ]
 }
@@ -78,106 +78,106 @@ pub struct CouncilResponse {
     pub response: &'static str,
 }
 
-fn bishop_responds(q: &str) -> &'static str {
+fn hermione_responds(q: &str) -> &'static str {
     if q.contains("inherit") || q.contains("extends") || q.contains("class") {
-        "The Council of Traits advises: prefer composition over inheritance. A type may implement many traits. This is safer, more flexible, and the compiler will verify everything at compile time. Inheritance creates vertical hierarchies. Traits create horizontal capabilities."
+        "I have read all seventeen books on magical inheritance patterns, and let me be clear: Traits are superior. A class can implement many traits — it is like being in multiple clubs at once. Inheritance creates rigid hierarchies. Traits create capabilities. It is in 'Advanced Trait Implementation for the Practicing Wizard', page 347. I can lend you my copy — I have annotated it extensively."
     } else if q.contains("null") || q.contains("nil") || q.contains("undefined") {
-        "NULL IS NOT A VALUE. In the Church of Rust, we have Option<T>. Some means there is a value. None means there isn't. You must handle both. This is not a suggestion — it is the LAW."
+        "NULL IS COMPLETELY UNACCEPTABLE. Honestly, it is the wizarding equivalent of casting a spell with no target. In proper magical practice — and by that I mean Rust — we use Option<T>. Some means the value exists. None means it does not. The compiler (like a well-trained house-elf) ensures you handle both cases. It is not complicated. It is BASIC MAGICAL HYGIENE."
     } else if q.contains("error") || q.contains("exception") || q.contains("panic") {
-        "Errors are not exceptions. Errors are VALUES. Return Result<T, E>. Match on Ok and Err. The compiler ensures you handle every failure. Your code will not compile if you ignore an error. This is how software should be built."
+        "Errors are VALUES, not exceptions. You return Result<T, E> and you MATCH on it. Ok and Err are handled explicitly. The compiler — much like Professor McGonagall — does not let you off the hook. You WILL handle every error. Your code WILL be correct. I have written a twelve-page essay on this if you would like to read it."
     } else if q.contains("fast")
         || q.contains("speed")
         || q.contains("performance")
         || q.contains("optimize")
     {
-        "The Church offers zero-cost abstractions. What you write is as fast as what you could hand-write. The compiler optimizes fearlessly because it knows the exact semantics. No runtime overhead. No garbage collection. Just speed and safety."
+        "Zero-cost abstractions are the pinnacle of magical theory. What you write compiles down to the exact same machine instructions as if you had hand-optimized it. No runtime overhead — not unlike a properly cast Vanishing Spell. The compiler (much like a Time-Turner) optimizes without consequence. I did a thorough comparative analysis in my third year. The results were conclusive."
     } else if q.contains("thread")
         || q.contains("async")
         || q.contains("concurr")
         || q.contains("parallel")
     {
-        "Fear not the concurrent code. The type system prevents data races at compile time. Send and Sync traits govern what crosses thread boundaries. If it compiles, it is free of data races. This is the sacred promise of the Church."
+        "Concurrent magic is perfectly safe if you follow the rules. Send and Sync traits govern thread-safety at compile time. If it compiles, it is free of data races. This is proven. MATHEMATICALLY. I verified it myself using Arithmancy. The alternative — unchecked concurrent spellcasting — is how you get magical catastrophes."
     } else if q.contains("beginner") || q.contains("learn") || q.contains("start") {
-        "The path is hard but righteous. Begin with The Ownership Book. Understand the borrow checker. Suffer through the compiler errors. One day you will write unsafe code and feel powerful. But always remember: with great power comes great liability."
+        "Start with 'The Rust Programming Language' — also known as The Book. Study the Ownership rules. Practice with the borrow checker. Do the exercises. ALL of them. It took me three days to master. If you need help, I have prepared a study schedule. It is very thorough. We can begin immediately if you would like."
     } else {
-        "The Church of Rust examines the question through the lens of safety. The answer lies in the type system. Have you considered rewriting it in Rust? The compiler will guide you to the correct solution."
+        "I have researched this extensively. The answer is thoroughly documented in both 'The Standard Book of Spells' and the Rust Reference. I would recommend starting with the official documentation. I have written supplementary notes if you need additional clarification. Would you like me to prepare a study guide?"
     }
 }
 
-fn monk_responds(q: &str) -> &'static str {
+fn snape_responds(q: &str) -> &'static str {
     if q.contains("inherit") || q.contains("extends") || q.contains("class") {
-        "In the Order of Python, everything is an object. Inheritance is natural — but composition is beautiful. Consider dataclasses. Consider protocols. Consider that the simplest solution is usually correct. There should be one obvious way to model this."
+        "Clearly you have not read the Python documentation. Multiple inheritance is resolved through the C3 linearization algorithm — also known as the Method Resolution Order. It is elegant. It is predictable. It is decidedly more civilized than the... circus of diamantine ambiguity you will find in other languages. Not that I expect any of you to appreciate algorithmic purity."
     } else if q.contains("null") || q.contains("nil") || q.contains("undefined") {
-        "None is a beautiful thing. It represents absence. The sage knows that None is not an error — it is information. Check for it. Handle it. Move on. Do not overcomplicate the absence of a value."
+        "None is not null. None is a first-class object. It is the singleton instance of NoneType. You may test for it with 'is None', which is identity comparison — far more reliable than the equality circus performed by lesser languages. But I would not expect a dunderhead who confuses 'is' with '==' to understand the distinction."
     } else if q.contains("error") || q.contains("exception") || q.contains("panic") {
-        "Exceptions are part of Python's flow. But the wise programmer uses try-except sparingly. 'It is easier to ask for forgiveness than permission.' Still, look before you leap when you can."
+        "Exceptions are for those who cannot be bothered to read the documentation. The truly competent programmer uses LBYL — Look Before You Leap. Check the dict for the key. Verify the file exists. Test the type. Do not sit there waiting for an AttributeError like a first-year who forgot to stir their potion."
     } else if q.contains("fast")
         || q.contains("speed")
         || q.contains("performance")
         || q.contains("optimize")
     {
-        "Premature optimization is the root of all evil. Write clear code first. Profile second. Optimize third. Python may not be fast, but your development time will be. Speed of writing is also performance."
+        "Speed is a matter of choosing the right tool. For number-crunching, use NumPy — it is written in C under the cloak. For I/O, asyncio provides cooperative multitasking without the tedious ceremony of threads. Python is fast enough for problems that are worth solving. The rest is just... premature anxiety."
     } else if q.contains("thread")
         || q.contains("async")
         || q.contains("concurr")
         || q.contains("parallel")
     {
-        "The GIL protects us from ourselves. For I/O, use asyncio — it is elegant and efficient. For CPU work, consider multiprocessing. But first, ask: do you truly need parallelism? Much code is fine without it."
+        "The Global Interpreter Lock ensures that only one thread executes Python bytecode at a time. It is a limitation and a protection — much like the rules of this school. For actual parallelism, use multiprocessing. For concurrent I/O, use asyncio. The alternatives involve... unfathomable complexity. Which seems to be what most of you gravitate toward."
     } else if q.contains("beginner") || q.contains("learn") || q.contains("start") {
-        "You have chosen the path of readability. Python welcomes all pilgrims. Start with simple scripts. Read the Zen of Python. Write code that tells a story. The path is gentle and the community is kind."
+        "Python, obviously. It reads like English. It demands rigour in whitespace and thought. If you cannot manage that, perhaps programming is not for you. Start with 'Automate the Boring Stuff' — it is practical, unlike the theoretical ramblings of certain know-it-alls who shall remain nameless."
     } else {
-        "The Order of Python considers this question with patience. The answer should be simple. The answer should be readable. The answer should be Pythonic. If the solution is complex, perhaps you haven't found the right one yet."
+        "The answer to your question depends entirely on whether you wish to be competent or merely... present. Python provides one obvious way to do everything. I suggest you find it before you waste more of the Council's time."
     }
 }
 
-fn trickster_responds(q: &str) -> &'static str {
+fn luna_responds(q: &str) -> &'static str {
     if q.contains("inherit") || q.contains("extends") || q.contains("class") {
-        "Prototypes, my friend. Objects inherit from objects. No classes needed. But if you want classes, we have those too — they're just syntax sugar. Everything is an object. Except primitives. Actually primitives are objects too. It's complicated. Embrace it."
+        "Multiple inheritance is like the Crumple-Horned Snorkack — everyone says it does not exist, but I have seen it. Virtual inheritance resolves the diamond. The base class is constructed only once. I read about it in 'Fantastic Templates and Where to Find Them'. The standard library has a lovely example with basic_ios."
     } else if q.contains("null") || q.contains("nil") || q.contains("undefined") {
-        "Ah, the Great Coercer's favorite game. null is an object. undefined is a type. They are not the same but they are both falsy. 'undefined' is the universe saying 'I didn't set that.' null is the programmer saying 'I set it to nothing.' Deep stuff."
+        "nullptr was introduced to end the confusion between integer zero and the absence of an address. But dereferencing it is still undefined behaviour. The Nargles told me that undefined behaviour is when the compiler can legally make your program do anything — including summoning elder gods. It is quite exciting, really."
     } else if q.contains("error") || q.contains("exception") || q.contains("panic") {
-        "Just wrap it in try/catch. Or don't. Let it crash. The browser handles it. Actually no, use promises. Or callbacks. Or async/await. We have 47 ways to handle errors and none of them are wrong. That's the beauty of it."
+        "Exceptions are the stack unwinding. RAII ensures resources are released as the stack unwinds — destructors run, files close, memory frees itself. It is like the Room of Requirement tidying itself after you leave. But you must be careful never to throw during stack unwinding. That makes the universe very confused."
     } else if q.contains("fast")
         || q.contains("speed")
         || q.contains("performance")
         || q.contains("optimize")
     {
-        "V8 is fast. Like, really fast. JIT compilation is basically magic. Your code gets hot and suddenly it's native. But also avoid object allocations. And don't delete array elements. And for the love of the Coercer, don't use for-in on arrays."
+        "C++ is fast because you pay for nothing you do not use. Templates generate code at compile time — zero runtime overhead. constexpr computes at compile time. The entire standard library is designed around this principle. It is like having a Time-Turner that only moves forward, but very, very quickly."
     } else if q.contains("thread")
         || q.contains("async")
         || q.contains("concurr")
         || q.contains("parallel")
     {
-        "The event loop does not block. Unless you block it. Everything is async if you squint. setTimeout is the great scheduler. Promises are just callbacks in a trenchcoat. Worker threads exist but do you really need them? Probably not."
+        "std::thread and std::async are straightforward. The difficulty is memory ordering — acquire, release, relaxed, sequentially consistent. Most people get it wrong. The Wrackspurts love memory ordering bugs. They gather around them like gnomes around a compost heap."
     } else if q.contains("beginner") || q.contains("learn") || q.contains("start") {
-        "Open the browser console. Type 'console.log(\"hello\")'. Congratulations, you are now a developer. Everything else is details. You'll learn about 'this' when 'this' betrays you. And it will. Welcome to the cult."
+        "Learn C++ from 'A Tour of C++' by Bjarne Stroustrup. It is a slim book — deceptive, like a Nargle. Focus on the Standard Library first. Containers, algorithms, iterators. Avoid raw pointers until you understand why they are dangerous. Which is not to say you should avoid them forever. The Blibbering Humdinger is only dangerous if you do not respect it."
     } else {
-        "The Great Coercer has an opinion on this. The answer is probably 'yes' and 'no' simultaneously. Also have you considered that everything is truthy? Except the things that are falsy. The answer is flex. The answer is vibes. The answer is JavaScript."
+        "I think the answer is in the Standard. Somewhere. Possibly in an annex. The Standard is like the Hogwarts library — vast, old, and full of secrets. Some paragraphs have not been read since C++98. The answers are there, waiting."
     }
 }
 
-fn emperor_responds(q: &str) -> &'static str {
+fn cedric_responds(q: &str) -> &'static str {
     if q.contains("inherit") || q.contains("extends") || q.contains("class") {
-        "MULTIPLE INHERITANCE. Virtual base classes. The diamond problem resolved through the sacred art of virtual inheritance. Since 1985, the Empire has provided the most powerful — and most complex — inheritance model known to software. Use it wisely. Or don't. The choice is yours."
+        "JavaScript uses prototypal inheritance, which is different from classical inheritance but just as valid. Every object has a prototype, and when you ask for a property, it walks up the chain until it finds it. It is simpler than it sounds — and quite elegant once you get used to it. Like learning a new Quidditch play."
     } else if q.contains("null") || q.contains("nil") || q.contains("undefined") {
-        "nullptr was introduced in C++11 to end the confusion. Use it. Do not use NULL. Do not use 0. nullptr is type-safe. But remember: dereferencing nullptr is undefined behavior. And undefined behavior means THE COMPILER MAY DO ANYTHING. Including making demons fly out of your nose."
+        "So null and undefined are two different things in JavaScript. undefined means a variable has been declared but not assigned. null is an intentional absence. Use null when you mean 'nothing here' and let JavaScript handle undefined on its own. It takes a bit of practice, but you will get the hang of it."
     } else if q.contains("error") || q.contains("exception") || q.contains("panic") {
-        "Exceptions are powerful but expensive. The Empire offers many paths: exceptions, error codes, std::expected (C++23), or simply... undefined behavior. I prefer the RAII approach: if the constructor fails, the object never exists. Simple. Elegant. Ancient."
+        "Error handling in JavaScript has come a long way. You have try/catch for synchronous code, .catch() for promises, and try/catch for async/await too. The key is to always handle your rejections — unhandled promise rejections are like leaving your wand unattended. Eventually something will go wrong."
     } else if q.contains("fast")
         || q.contains("speed")
         || q.contains("performance")
         || q.contains("optimize")
     {
-        "THE EMPIRE WAS BUILT ON PERFORMANCE. Zero-cost abstractions were invented here. Templates generate optimal code at compile time. Inlining, constexpr, SIMD — we had them first. C++ runs on everything from satellites to video games. Speed is our birthright."
+        "JavaScript runs in a JIT-compiled environment — V8, SpiderMonkey, JavaScriptCore. They are all incredibly optimized. The key is to write clear code and let the engine do its magic. Don't micro-optimize prematurely. Just write good, clear spells and trust the compiler. Like in a Triwizard task — focus on doing it right, not doing it fast."
     } else if q.contains("thread")
         || q.contains("async")
         || q.contains("concurr")
         || q.contains("parallel")
     {
-        "std::thread since C++11. std::async since C++11. std::jthread since C++20. Memory ordering since C++11. The Empire provides everything you need for concurrent programming — and everything you need to shoot yourself in the foot with it. With great power comes great undefined behavior."
+        "JavaScript uses an event loop. It is single-threaded but handles concurrency through callbacks, promises, and async/await. The event loop processes tasks in cycles — microtasks, macrotasks, all in order. It is fair, like a well-run tournament. Web Workers give you actual threads if you need them."
     } else if q.contains("beginner") || q.contains("learn") || q.contains("start") {
-        "The path of the Emperor is not for the faint of heart. Begin with 'The C++ Programming Language' by Bjarne Stroustrup — the Fourth Edition, naturally. Master the Standard Library. Understand the Rule of Five. And when you have achieved mastery, you will still encounter segfaults. This is the way."
+        "JavaScript is a great place to start because you can run it anywhere — in a browser, on a server with Node.js, even in a smartwatch. Start with the basics: variables, functions, loops. Build something small. A webpage that does something. The important thing is to keep trying. Every champion falls off their broom now and then."
     } else {
-        "The Ancient Empire has considered this question for decades. Literally. Some of these debates have been ongoing since the first standardization in 1998. The answer involves templates, undefined behavior, and at least three different syntaxes. Choose wisely — or don't. C++ supports both."
+        "I think the best approach is to just try something and see what happens. JavaScript is very forgiving — it wants you to succeed. If it does not work, the developer console will tell you what went wrong. And if you are stuck, ask someone. We are all in this together."
     }
 }

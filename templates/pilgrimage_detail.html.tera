@@ -1,6 +1,6 @@
 {% extends "base.html.tera" %}
 
-{% block title %}Pilgrimage: {{ religion.name }} — Museum of Programming Religions{% endblock title %}
+{% block title %}Pilgrimage: {{ religion.name }} — Hogwarts School of Witchcraft & Programming{% endblock title %}
 
 {% block content %}
 <div class="page-header" style="border-color: {{ religion.color }};">
@@ -28,13 +28,13 @@
             <p>{{ religion.history }}</p>
         </div>
         <div class="chapter-reflection">
-            <p><em>Reflection: Every religion has an origin story. {{ religion.name }}'s story begins with a problem that needed solving — and a creator who had a vision.</em></p>
+            <p><em>Reflection: Every great wizarding house has an origin story. {{ religion.name }}'s story begins with a magical problem that needed solving — and a founder who had a vision.</em></p>
         </div>
     </div>
 
     <div class="pilgrimage-chapter">
         <h2>Chapter 2: The Sacred Laws</h2>
-        <p>These are the commandments that every follower must obey. Breaking them is heresy.</p>
+        <p>These are the sacred rules that every member of the house must obey. Breaking them is a Ministry-level offense.</p>
         <div class="commandments">
             {% for cmd in religion.commandments %}
             <div class="commandment-card">
@@ -47,7 +47,7 @@
 
     <div class="pilgrimage-chapter">
         <h2>Chapter 3: The Doctrines</h2>
-        <p>The theological foundations of {{ religion.name }}. These doctrines define how the faithful write code.</p>
+        <p>The magical foundations of {{ religion.name }}. These doctrines define how the house writes its incantations.</p>
         <div class="doctrines">
             {% for doctrine in religion.doctrines %}
             <div class="doctrine-card">
@@ -60,7 +60,7 @@
 
     <div class="pilgrimage-chapter">
         <h2>Chapter 4: Holy Relics</h2>
-        <p>Sacred artifacts from the history of {{ religion.name }}.</p>
+        <p>Enchanted artifacts from the founding of {{ religion.house }}.</p>
         <div class="relics-grid">
             {% for relic in religion.relics %}
             <div class="relic-card">
@@ -89,11 +89,11 @@
 
 <div class="pilgrimage-complete">
     <h3>🏁 Pilgrimage Complete</h3>
-    <p>You have completed the pilgrimage through {{ religion.name }}. You now understand its beliefs, its laws, and its miracles.</p>
+    <p>You have completed the enchanted journey through {{ religion.house }}. You now understand its spells, its laws, and its magical artifacts.</p>
     <div class="pilgrimage-nav">
         <a href="/pilgrimage" class="nav-button">← All Pilgrimages</a>
-        <a href="/exhibit/{{ religion.id }}" class="nav-button">Visit Exhibit →</a>
-        <a href="/heresy" class="nav-button">Test Your Knowledge →</a>
+        <a href="/exhibit/{{ religion.id }}" class="nav-button">Visit Common Room →</a>
+        <a href="/heresy" class="nav-button">Test Your Spells →</a>
     </div>
 </div>
 {% endblock content %}

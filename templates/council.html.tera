@@ -1,17 +1,17 @@
 {% extends "base.html.tera" %}
 
-{% block title %}Council of Languages — Museum of Programming Religions{% endblock title %}
+{% block title %}Council of Hogwarts — Hogwarts School of Witchcraft & Programming{% endblock title %}
 
 {% block content %}
 <div class="page-header">
     <pre class="ascii-art">
 ╔═══════════════════════════════════════╗
 ║                                       ║
-║   THE COUNCIL OF LANGUAGES            ║
+║   THE COUNCIL OF HOGWARTS             ║
 ║                                       ║
 ╚═══════════════════════════════════════╝
     </pre>
-    <p>Four ancient beings sit in eternal deliberation. Ask a question, and they will answer — each according to their nature.</p>
+    <p>Four distinguished witches and wizards sit in eternal deliberation. Ask a programming question, and they will answer — each according to their nature and house.</p>
 </div>
 
 <div class="council-chamber">
@@ -27,8 +27,8 @@
     </div>
 
     <div class="council-oracle">
-        <h2>🗣️ Pose Your Question</h2>
-        <p>The Council will debate any topic. Ask about inheritance, null, errors, performance — or anything else.</p>
+        <h2>🗣️ Pose Your Question to the Council</h2>
+        <p>The Council will debate any programming topic. Ask about inheritance, null, errors, performance — or anything else that troubles your wizardry.</p>
         <div class="council-input-area">
             <input type="text" id="council-question" class="council-input" placeholder="e.g. Should I use inheritance?" onkeydown="if(event.key==='Enter') askCouncil()">
             <button onclick="askCouncil()" class="cta-button">Ask the Council →</button>
@@ -44,7 +44,7 @@
     </div>
 
     <div id="council-loading" class="council-loading" style="display: none;">
-        <div class="loading-text">⚖️ The Council is deliberating...</div>
+        <div class="loading-text">⚖️ The Council is deliberating... Hermione has already read three books on the subject.</div>
         <div class="spinner"></div>
     </div>
 
@@ -88,12 +88,12 @@ async function askCouncil() {
             `;
         });
 
-        responsesDiv.innerHTML += `<div class="debate-closing">The Council has spoken. Seek wisdom in their words — or ignore them at your peril.</div>`;
+        responsesDiv.innerHTML += `<div class="debate-closing">The Council has spoken. Seek wisdom in their words — or ignore them at your peril. Mischief managed.</div>`;
 
     } catch (err) {
         document.getElementById('council-loading').style.display = 'none';
         document.getElementById('council-debate').style.display = 'block';
-        document.getElementById('council-responses').innerHTML = `<div class="error-msg">The Council could not convene: ${err.message}</div>`;
+        document.getElementById('council-responses').innerHTML = `<div class="error-msg">The Council could not convene: ${err.message}. Perhaps Dumbledore is away from the castle.</div>`;
     }
 }
 

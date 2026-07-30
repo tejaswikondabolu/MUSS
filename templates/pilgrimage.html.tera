@@ -1,6 +1,6 @@
 {% extends "base.html.tera" %}
 
-{% block title %}Pilgrimages — Museum of Programming Religions{% endblock title %}
+{% block title %}Pilgrimages — Hogwarts School of Witchcraft & Programming{% endblock title %}
 
 {% block content %}
 <div class="page-header">
@@ -8,23 +8,25 @@
 ╔═══════════════════════════════════════╗
 ║                                       ║
 ║   PILGRIMAGES                         ║
+║   THE ENCHANTED CORRIDORS             ║
 ║                                       ║
 ╚═══════════════════════════════════════╝
     </pre>
-    <p>Embark on a guided journey through the religions of software civilization. Each pilgrimage teaches a language's core concepts through stories, exhibits, and sacred rituals.</p>
+    <p>Embark on a guided journey through the houses of wizardly programming. Each pilgrimage teaches a language's core concepts through stories, exhibits, and sacred incantations.</p>
 </div>
 
 <div class="pilgrimage-list">
     {% for religion in religions %}
     <div class="pilgrimage-card" style="--religion-color: {{ religion.color }};">
         <div class="pilgrimage-header" style="background: {{ religion.color }};">
-            <h3>{{ religion.name }}</h3>
+            <h3>{{ religion.name }} — {{ religion.house }}</h3>
         </div>
         <div class="pilgrimage-body">
-            <p><strong>Core Belief:</strong> {{ religion.core_belief }}</p>
-            <p><strong>Duration:</strong> One reading</p>
+            <p><strong>House:</strong> {{ religion.house }}</p>
+            <p><strong>Core Spell:</strong> {{ religion.core_belief }}</p>
+            <p><strong>Duration:</strong> One reading by the fire</p>
             <p><strong>Difficulty:</strong> {{ religion.danger_level }}</p>
-            <p class="pilgrimage-desc">Walk through the halls of {{ religion.name }}. Learn about its founding, its sacred laws, its doctrines, and its miracles. A complete guided tour of this programming religion.</p>
+            <p class="pilgrimage-desc">Walk through the enchanted corridors of {{ religion.house }}. Learn about its founding, its sacred laws, its doctrines, and its miracles. A complete guided tour of this programming house.</p>
         </div>
         <div class="pilgrimage-footer">
             <a href="/pilgrimage/{{ religion.id }}" class="cta-button" style="background: {{ religion.color }};">Begin Pilgrimage →</a>

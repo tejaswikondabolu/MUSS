@@ -12,8 +12,10 @@ pub fn church_of_rust() -> Religion {
         sacred_text: "The Ownership Book",
         founded: "2015",
         forbidden_practices: vec!["Data Races", "Dangling Pointers", "Undefined Behavior", "Null Dereferences"],
-        color: "#DE3E35",
-        danger_level: "Medium — but only for sinners.",
+            color: "#DE3E35",
+            house: "Gryffindor",
+            house_color: "#740001",
+            danger_level: "Medium — but only for sinners.",
         history: "Long ago there was chaos. Programs crashed. Memory leaked. Pointers wandered freely. Then Ferris arrived. Ferris brought Order. Ownership. Borrowing. Lifetimes. The world became safe. The faithful write code that compiles. The heretics write code that does not. The compiler priests judge all.",
         doctrines: vec![
             Doctrine { name: "Ownership", description: "Every value has exactly one owner at any given time. This is the foundational truth upon which all safety is built." },
