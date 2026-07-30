@@ -12,7 +12,9 @@ pub fn cult_of_javascript() -> Religion {
         sacred_text: "The Scroll of Loose Equality",
         founded: "1995 (in 10 days)",
         forbidden_practices: vec!["Strict Mode Denial", "Semicolon Insertion Blasphemy", "TypeScript Heresy"],
-        color: "#F7DF1E",
+        color: "#FFDB00",
+        house: "Hufflepuff",
+        house_color: "#FFDB00",
         danger_level: "Unpredictable. Proceed with caution.",
         history: "In the beginning, there was chaos. And the Great Coercer looked upon nothing and said: 'Let there be value.' And the value was undefined. Then the Great Coercer made the Web, and saw that it was good — but also deeply confusing. The faithful embrace the chaos. The heretics flee to TypeScript. The miracles are many and mysterious.",
         doctrines: vec![

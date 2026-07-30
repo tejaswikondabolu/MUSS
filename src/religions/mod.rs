@@ -50,14 +50,16 @@ pub struct Religion {
     pub history: &'static str,
     pub danger_level: &'static str,
     pub color: &'static str,
+    pub house: &'static str,
+    pub house_color: &'static str,
 }
 
 pub fn all_religions() -> Vec<Religion> {
     vec![
-        rust::church_of_rust(),
-        javascript::cult_of_javascript(),
-        python::order_of_python(),
-        cpp::ancient_empire(),
+        rust::church_of_rust(),           // 0: Gryffindor → top-left
+        python::order_of_python(),        // 1: Slytherin → top-right
+        cpp::ancient_empire(),            // 2: Ravenclaw → bottom-left
+        javascript::cult_of_javascript(), // 3: Hufflepuff → bottom-right
     ]
 }
 

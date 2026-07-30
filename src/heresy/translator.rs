@@ -15,7 +15,7 @@ pub fn translate_error(error: &CompilerError) -> HeresyReport {
 
     match code {
         "E0382" =>         HeresyReport {
-            religion: "Church of Rust".to_string(),
+            religion: "Gryffindor (House of Rust)".to_string(),
             violation: "Ownership Heresy".to_string(),
             law_violated: "First Law of Ownership".to_string(),
             explanation: format!(
@@ -26,7 +26,7 @@ pub fn translate_error(error: &CompilerError) -> HeresyReport {
             penance: "Clone the value before moving, or restructure your code to use references.".to_string(),
         },
         "E0502" => HeresyReport {
-            religion: "Church of Rust".to_string(),
+            religion: "Gryffindor (House of Rust)".to_string(),
             violation: "Borrowing Violation".to_string(),
             law_violated: "Second Law of Ownership — Borrowing".to_string(),
             explanation: format!(
@@ -37,7 +37,7 @@ pub fn translate_error(error: &CompilerError) -> HeresyReport {
             penance: "Restrict the scope of mutable borrows or reorder operations.".to_string(),
         },
         "E0506" | "E0597" => HeresyReport {
-            religion: "Church of Rust".to_string(),
+            religion: "Gryffindor (House of Rust)".to_string(),
             violation: "Lifetime Violation".to_string(),
             law_violated: "Third Law — No reference shall outlive its creator".to_string(),
             explanation: format!(
@@ -48,7 +48,7 @@ pub fn translate_error(error: &CompilerError) -> HeresyReport {
             penance: "Ensure the referenced value lives at least as long as the reference.".to_string(),
         },
         "E0384" => HeresyReport {
-            religion: "Church of Rust".to_string(),
+            religion: "Gryffindor (House of Rust)".to_string(),
             violation: "Mutability Heresy".to_string(),
             law_violated: "The Doctrine of Immutability".to_string(),
             explanation: format!(
@@ -59,7 +59,7 @@ pub fn translate_error(error: &CompilerError) -> HeresyReport {
             penance: "Add `mut` to the variable declaration if mutation is intended.".to_string(),
         },
         "E0596" => HeresyReport {
-            religion: "Church of Rust".to_string(),
+            religion: "Gryffindor (House of Rust)".to_string(),
             violation: "Borrowing Heresy".to_string(),
             law_violated: "Cannot borrow as mutable".to_string(),
             explanation: format!(
@@ -70,7 +70,7 @@ pub fn translate_error(error: &CompilerError) -> HeresyReport {
             penance: "Declare the binding as `mut` or use interior mutability (Cell/RefCell).".to_string(),
         },
         "E0004" => HeresyReport {
-            religion: "Church of Rust".to_string(),
+            religion: "Gryffindor (House of Rust)".to_string(),
             violation: "Exhaustiveness Heresy".to_string(),
             law_violated: "The Doctrine of Complete Coverage".to_string(),
             explanation: format!(
@@ -81,7 +81,7 @@ pub fn translate_error(error: &CompilerError) -> HeresyReport {
             penance: "Add a catch-all pattern (`_ =>`) or handle all missing variants.".to_string(),
         },
         "E0308" => HeresyReport {
-            religion: "Church of Rust".to_string(),
+            religion: "Gryffindor (House of Rust)".to_string(),
             violation: "Type Mismatch Heresy".to_string(),
             law_violated: "The Doctrine of Type Purity".to_string(),
             explanation: format!(
@@ -92,7 +92,7 @@ pub fn translate_error(error: &CompilerError) -> HeresyReport {
             penance: "Convert the value to the correct type or adjust the expected type.".to_string(),
         },
         "E0277" => HeresyReport {
-            religion: "Church of Rust".to_string(),
+            religion: "Gryffindor (House of Rust)".to_string(),
             violation: "Missing Trait Heresy".to_string(),
             law_violated: "The Doctrine of Shared Behaviour".to_string(),
             explanation: format!(
@@ -103,7 +103,7 @@ pub fn translate_error(error: &CompilerError) -> HeresyReport {
             penance: "Implement the missing trait or use a type that does implement it.".to_string(),
         },
         "E0425" => HeresyReport {
-            religion: "Church of Rust".to_string(),
+            religion: "Gryffindor (House of Rust)".to_string(),
             violation: "Name Resolution Heresy".to_string(),
             law_violated: "The Law of Named Entities".to_string(),
             explanation: format!(
@@ -114,7 +114,7 @@ pub fn translate_error(error: &CompilerError) -> HeresyReport {
             penance: "Check the spelling, import the module, or declare the variable.".to_string(),
         },
         "E0432" => HeresyReport {
-            religion: "Church of Rust".to_string(),
+            religion: "Gryffindor (House of Rust)".to_string(),
             violation: "Import Heresy".to_string(),
             law_violated: "The Law of Module Navigation".to_string(),
             explanation: format!(
@@ -125,7 +125,7 @@ pub fn translate_error(error: &CompilerError) -> HeresyReport {
             penance: "Verify the module path and ensure the module is declared or available.".to_string(),
         },
         "E0463" => HeresyReport {
-            religion: "Church of Rust".to_string(),
+            religion: "Gryffindor (House of Rust)".to_string(),
             violation: "Crate Heresy".to_string(),
             law_violated: "The Law of External Dependencies".to_string(),
             explanation: format!(
@@ -136,7 +136,7 @@ pub fn translate_error(error: &CompilerError) -> HeresyReport {
             penance: "Add the crate to Cargo.toml or check the crate name for typos.".to_string(),
         },
         "E0106" => HeresyReport {
-            religion: "Church of Rust".to_string(),
+            religion: "Gryffindor (House of Rust)".to_string(),
             violation: "Elided Lifetime Heresy".to_string(),
             law_violated: "The Law of Explicit Lifetimes".to_string(),
             explanation: format!(
@@ -147,7 +147,7 @@ pub fn translate_error(error: &CompilerError) -> HeresyReport {
             penance: "Add explicit lifetime parameters to the function signature.".to_string(),
         },
         _ => HeresyReport {
-            religion: "Church of Rust".to_string(),
+            religion: "Gryffindor (House of Rust)".to_string(),
             violation: (if error.code.is_some() { "Canonical Heresy" } else { "General Transgression" }).to_string(),
             law_violated: "The Sacred Law".to_string(),
             explanation: format!(
@@ -162,7 +162,7 @@ pub fn translate_error(error: &CompilerError) -> HeresyReport {
 
 pub fn translate_warning(warning: &str) -> String {
     if warning.contains("unused") {
-        format!("📜 Minor Transgression: A resource was created but never used. The Church frowns upon waste.")
+        format!("📜 Minor Transgression: A resource was created but never used. Gryffindor frowns upon waste.")
     } else if warning.contains("dead_code") {
         format!("📜 Ancient Code Found: Dead code lingers in the codebase. Purge it.")
     } else if warning.contains("deprecated") {

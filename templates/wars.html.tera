@@ -1,17 +1,18 @@
 {% extends "base.html.tera" %}
 
-{% block title %}Religious Wars — Museum of Programming Religions{% endblock title %}
+{% block title %}Magical Wars — Hogwarts School of Witchcraft & Programming{% endblock title %}
 
 {% block content %}
 <div class="page-header">
     <pre class="ascii-art">
 ╔═══════════════════════════════════════╗
 ║                                       ║
-║   RELIGIOUS WARS                      ║
+║   MAGICAL WARS                        ║
+║   THE GREAT WIZARDING CONFLICTS       ║
 ║                                       ║
 ╚═══════════════════════════════════════╝
     </pre>
-    <p>Throughout software civilization, the religions have clashed over fundamental beliefs. These are the great conflicts that shaped the world of code.</p>
+    <p>Throughout wizarding programming history, the houses have clashed over fundamental beliefs. These are the great conflicts that shaped the world of code.</p>
 </div>
 
 <div class="wars-list">
@@ -33,7 +34,7 @@
             <p>{{ war.description }}</p>
         </div>
         <div class="war-casualties">
-            <p><strong>Casualties:</strong> {{ war.casualties }}</p>
+            <p><strong>Magical Casualties:</strong> {{ war.casualties }}</p>
         </div>
     </div>
     {% endfor %}

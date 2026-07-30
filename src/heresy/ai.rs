@@ -90,6 +90,6 @@ pub fn generate_narrative(error_message: &str, error_code: Option<&str>) -> Narr
     Narrative {
         title,
         story,
-        verdict: verdict.to_string(),
+        verdict: verdict.to_string(),o
     }
 }

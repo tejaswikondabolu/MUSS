@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Museum of Programming Religions{% endblock title %}</title>
+    <title>{% block title %}Hogwarts School of Witchcraft & Programming{% endblock title %}</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <nav class="nav-bar">
         <div class="nav-inner">
             <a href="/" class="nav-title">
-                <span class="nav-emblem">🏛️</span>
-                <span class="nav-title-text">Museum of Programming Religions</span>
+                <span class="nav-emblem">🏰</span>
+                <span class="nav-title-text">Hogwarts School of Witchcraft & Programming</span>
             </a>
             <div class="nav-links">
                 <a href="/" class="nav-link">Home</a>
                 <a href="/heresy" class="nav-link">Heresy Detector</a>
+                <a href="/quiz" class="nav-link">Sorting Hat</a>
+                <a href="/council" class="nav-link">Council</a>
                 <a href="/pilgrimage" class="nav-link">Pilgrimages</a>
                 <a href="/relics" class="nav-link">Relics</a>
-                <a href="/wars" class="nav-link">Religious Wars</a>
+                <a href="/wars" class="nav-link">Magical Wars</a>
             </div>
         </div>
         <div class="nav-frieze"></div>
@@ -26,22 +28,59 @@
     <main class="main-content">
         {% block content %}{% endblock content %}
     </main>
+
+    <script>
+    function toggleGuide() {
+        const bubble = document.getElementById('guide-bubble');
+        const toggle = document.querySelector('.guide-toggle');
+        bubble.classList.toggle('visible');
+        toggle.classList.toggle('active');
+    }
+    </script>
+    <div class="guide-widget" id="guide-widget">
+        <div class="guide-toggle" onclick="toggleGuide()">
+            <span class="guide-avatar">🗺️</span>
+            <span class="guide-label">Map</span>
+        </div>
+        <div class="guide-bubble" id="guide-bubble">
+            <div class="guide-header">
+                <span class="guide-avatar-large">🗺️</span>
+                <div class="guide-info">
+                    <span class="guide-name">The Marauder's Map</span>
+                    <span class="guide-title">Hogwarts Guide</span>
+                </div>
+                <button class="guide-close" onclick="toggleGuide()">✕</button>
+            </div>
+            <div class="guide-body">
+                {% if guide_wisdom %}
+                <p class="guide-quote">{{ guide_wisdom.quote }}</p>
+                <p class="guide-tip"><strong>💡 Tip:</strong> {{ guide_wisdom.tip }}</p>
+                {% endif %}
+            </div>
+            <div class="guide-footer">
+                <span class="guide-footer-text">🗺️ I solemnly swear that I am up to no good</span>
+            </div>
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="footer-columns">
             <div class="footer-col">
-                <span class="footer-emblem">🏛️</span>
-                <p>Museum of Programming Religions</p>
-                <p class="footer-small">Where languages become legends.</p>
+                <span class="footer-emblem">🏰</span>
+                <p>Hogwarts School of Witchcraft & Programming</p>
+                <p class="footer-small">Where code becomes magic.</p>
             </div>
             <div class="footer-col footer-links">
                 <a href="/">Home</a>
                 <a href="/heresy">Heresy Detector</a>
                 <a href="/pilgrimage">Pilgrimages</a>
                 <a href="/relics">Relics</a>
-                <a href="/wars">Religious Wars</a>
+                <a href="/wars">Magical Wars</a>
+                <a href="/quiz">Sorting Hat</a>
+                <a href="/council">Council of Hogwarts</a>
             </div>
         </div>
-        <p class="footer-small">All religions depicted are fictional. May the compiler be with you.</p>
+        <p class="footer-small">All houses depicted are fictional. Mischief managed.</p>
     </footer>
 </body>
 </html>
