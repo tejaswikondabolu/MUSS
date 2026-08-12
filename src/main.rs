@@ -12,11 +12,13 @@ use axum::{
 };
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
+use std::time::Duration;
 use tera::{Tera, Context};
 use tower_http::services::ServeDir;
 
 struct AppState {
     tera: Tera,
+    client: reqwest::Client,
 }
 
 #[derive(Deserialize)]
@@ -44,6 +46,23 @@ struct CouncilAskParams {
     question: String,
 }
 
+#[derive(Deserialize)]
+struct FastAPICouncilResponse {
+    responses: Vec<FastAPIMemberResponse>,
+}
+
+#[derive(Deserialize)]
+struct FastAPIMemberResponse {
+    id: String,
+    name: String,
+    title: String,
+    icon: String,
+    color: String,
+    personality: String,
+    expertise: String,
+    response: String,
+}
+
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt::init();
@@ -51,7 +70,12 @@ async fn main() {
     let mut tera = Tera::new("templates/**/*.html.tera").expect("Failed to load templates");
     tera.autoescape_on(vec![]);
 
-    let state = Arc::new(AppState { tera });
+    let client = reqwest::Client::builder()
+        .timeout(Duration::from_secs(120))
+        .connect_timeout(Duration::from_secs(5))
+        .build()
+        .unwrap();
+    let state = Arc::new(AppState { tera, client });
 
     let app = Router::new()
         .route("/", get(home))
@@ -311,6 +335,65 @@ async fn council_page(State(state): State<Arc<AppState>>) -> Html<String> {
     Html(html)
 }
 
-async fn council_ask(Query(params): Query<CouncilAskParams>) -> Json<Vec<council::CouncilResponse>> {
-    Json(council::get_debate(&params.question))
+async fn council_ask(
+    State(state): State<Arc<AppState>>,
+    Query(params): Query<CouncilAskParams>,
+) -> Json<serde_json::Value> {
+    let fallback = || -> Json<serde_json::Value> {
+        let responses: Vec<serde_json::Value> = council::get_debate(&params.question)
+            .iter()
+            .map(|r| {
+                serde_json::json!({
+                    "member": {
+                        "id": r.member.id,
+                        "name": r.member.name,
+                        "title": r.member.title,
+                        "icon": r.member.icon,
+                        "color": r.member.color,
+                        "personality": r.member.personality,
+                        "expertise": r.member.expertise,
+                    },
+                    "response": r.response,
+                })
+            })
+            .collect();
+        Json(serde_json::Value::Array(responses))
+    };
+
+    match state
+        .client
+        .post("http://localhost:8001/council/ask")
+        .json(&serde_json::json!({
+            "question": params.question,
+            "user_id": "anonymous"
+        }))
+        .send()
+        .await
+    {
+        Ok(resp) if resp.status().is_success() => {
+            if let Ok(fastapi_resp) = resp.json::<FastAPICouncilResponse>().await {
+                let responses: Vec<serde_json::Value> = fastapi_resp
+                    .responses
+                    .iter()
+                    .map(|m| {
+                        serde_json::json!({
+                            "member": {
+                                "id": m.id,
+                                "name": m.name,
+                                "title": m.title,
+                                "icon": m.icon,
+                                "color": m.color,
+                                "personality": m.personality,
+                                "expertise": m.expertise,
+                            },
+                            "response": m.response,
+                        })
+                    })
+                    .collect();
+                return Json(serde_json::Value::Array(responses));
+            }
+            fallback()
+        }
+        _ => fallback(),
+    }
 }

@@ -12,9 +12,9 @@ pub fn order_of_python() -> Religion {
         sacred_text: "The Zen of Python (The Book of Readability)",
         founded: "1991",
         forbidden_practices: vec!["Explicit Type Declarations", "Deep Nesting", "Magic Numbers", "Silent Exception Handling"],
-            color: "#1A472A",
+            color: "#2ecc71",
             house: "Slytherin",
-            house_color: "#1A472A",
+            house_color: "#2ecc71",
             danger_level: "Low. The Order is welcoming to all pilgrims.",
         history: "In the late 1980s, Guido van Rossum sought a language that valued readability above all. During Christmas 1989, he began writing Python. The Order grew slowly at first, then spread across the world. Its sacred text, The Zen of Python, contains 19 aphorisms that guide the faithful. The Order values clarity, simplicity, and one obvious way to do everything.",
         doctrines: vec![

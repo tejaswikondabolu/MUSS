@@ -12,9 +12,9 @@ pub fn ancient_empire() -> Religion {
         sacred_text: "The Standard Scroll (ISO/IEC 14882)",
         founded: "1985 (as C with Classes)",
         forbidden_practices: vec!["Undefined Behavior", "Memory Leaks", "ODR Violations", "Template Metaprogramming Hubris"],
-        color: "#2A4B8C",
+        color: "#5dade2",
         house: "Ravenclaw",
-        house_color: "#2A4B8C",
+        house_color: "#5dade2",
         danger_level: "Extreme. Travelers are advised not to wander alone.",
         history: "The Ancient Empire began as 'C with Classes' in 1985. Bjarne Stroustrup sought to add structure to the wild lands of C without sacrificing performance. The Empire grew vast and powerful, accumulating features across decades. Templates. Exceptions. The STL. Move semantics. Lambdas. Each era added new power — and new complexity. Today the Empire is ancient, mighty, and feared. Its temples contain knowledge from before the Great Standardization.",
         doctrines: vec![
