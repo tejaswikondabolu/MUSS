@@ -1,0 +1,100 @@
+[
+  {
+    "id": 1,
+    "text": "Ownership is Rust's most unique feature. It enables memory safety guarantees without a garbage collector. Each value in Rust has a single owner. When the owner goes out of scope, the value is dropped. Ownership can be transferred (moved) or borrowed. The borrow checker enforces these rules at compile time, preventing use-after-free, double-free, and dangling pointers.",
+    "source": "The Rust Book — Ownership",
+    "language": "rust",
+    "character_id": "hermione"
+  },
+  {
+    "id": 2,
+    "text": "References allow you to borrow a value without taking ownership. There are two types: shared references (&T) which allow multiple readers, and mutable references (&mut T) which allow exclusive write access. The borrow checker enforces that you cannot have a mutable reference while any shared references exist, preventing data races at compile time.",
+    "source": "The Rust Book — References & Borrowing",
+    "language": "rust",
+    "character_id": "hermione"
+  },
+  {
+    "id": 3,
+    "text": "The Result type in Rust is used for recoverable errors. It is an enum with two variants: Ok(T) for success and Err(E) for failure. The ? operator propagates errors automatically, making error handling concise without exceptions. The match expression on Result forces you to handle both cases, eliminating forgotten error paths.",
+    "source": "The Rust Book — Error Handling",
+    "language": "rust",
+    "character_id": "hermione"
+  },
+  {
+    "id": 4,
+    "text": "Python's indentation-based syntax is not arbitrary — it enforces visual structure that mirrors logical structure. The PEP 8 style guide specifies 4 spaces per indentation level. This consistency means every Python project looks structurally similar, reducing cognitive load when reading unfamiliar code. The indentation is part of Python's philosophy that code is read far more often than written.",
+    "source": "Python Documentation — PEP 8",
+    "language": "python",
+    "character_id": "snape"
+  },
+  {
+    "id": 5,
+    "text": "List comprehensions in Python provide a concise way to create lists. The syntax is [expression for item in iterable if condition]. They are faster than manual for-loop construction because the iteration is executed in C at the interpreter level. Dictionary comprehensions and set comprehensions follow the same pattern with {} syntax.",
+    "source": "Python Documentation — Data Structures",
+    "language": "python",
+    "character_id": "snape"
+  },
+  {
+    "id": 6,
+    "text": "Python decorators are functions that modify the behavior of other functions. A decorator is a callable that accepts a function as argument and returns a replacement function. The @ syntax is syntactic sugar for wrapped = decorator(wrapped). Decorators are widely used for logging, access control, memoization, and registering callbacks.",
+    "source": "Python Documentation — Decorators",
+    "language": "python",
+    "character_id": "snape"
+  },
+  {
+    "id": 7,
+    "text": "RAII (Resource Acquisition Is Initialization) in C++ binds resource lifetime to object lifetime. Resources are acquired in constructors and released in destructors. When an object goes out of scope, its destructor runs automatically, even if an exception is thrown. This guarantees no resource leaks without requiring explicit try/finally blocks.",
+    "source": "C++ Reference — RAII",
+    "language": "cpp",
+    "character_id": "luna"
+  },
+  {
+    "id": 8,
+    "text": "C++ templates enable compile-time polymorphism and metaprogramming. Function templates and class templates are parameterized by types, values, or other templates. Template specialization allows providing different implementations for specific types. C++20 concepts constrain template parameters with compile-time predicates, producing clearer error messages.",
+    "source": "C++ Reference — Templates",
+    "language": "cpp",
+    "character_id": "luna"
+  },
+  {
+    "id": 9,
+    "text": "Undefined behavior in C++ occurs when a program violates rules the standard does not require any specific handling for. Examples: dereferencing null pointers, buffer overflows, integer overflow, using uninitialized variables. The compiler assumes UB never happens and may optimize accordingly, leading to surprising program behavior. UB is not required to crash — it can do literally anything.",
+    "source": "C++ Reference — Undefined Behavior",
+    "language": "cpp",
+    "character_id": "luna"
+  },
+  {
+    "id": 10,
+    "text": "The JavaScript event loop is the core concurrency model. JavaScript is single-threaded but non-blocking via an event loop. The call stack executes synchronous code; async callbacks go to the task queue. Microtasks (Promise.then, queueMicrotask) execute before macrotasks (setTimeout, setInterval). This enables non-blocking I/O despite a single thread.",
+    "source": "MDN — Event Loop",
+    "language": "javascript",
+    "character_id": "cedric"
+  },
+  {
+    "id": 11,
+    "text": "JavaScript Promises represent values that may be available now, later, or never. A Promise is in one of three states: pending, fulfilled, or rejected. The .then() method handles fulfillment, .catch() handles rejection, and .finally() runs regardless. Promise.all() waits for all promises, Promise.race() returns the first settled promise, and Promise.allSettled() waits for all regardless of outcome.",
+    "source": "MDN — Promises",
+    "language": "javascript",
+    "character_id": "cedric"
+  },
+  {
+    "id": 12,
+    "text": "The DOM (Document Object Model) is a programming interface for HTML documents. It represents the page as a tree of nodes that can be traversed and manipulated. document.querySelector() and document.querySelectorAll() use CSS selector syntax for element selection. Event delegation attaches a single handler to a parent element instead of multiple handlers to child elements.",
+    "source": "MDN — DOM Manipulation",
+    "language": "javascript",
+    "character_id": "cedric"
+  },
+  {
+    "id": 13,
+    "text": "Hogwarts School of Witchcraft and Wizardry was founded over a thousand years ago by four founders: Godric Gryffindor, Helga Hufflepuff, Rowena Ravenclaw, and Salazar Slytherin. Each founder created their own house, valuing specific traits. The Sorting Hat, originally a wizard's hat, was enchanted by the founders to sort students into houses based on their qualities and preferences.",
+    "source": "Hogwarts: A History",
+    "language": "general",
+    "character_id": ""
+  },
+  {
+    "id": 14,
+    "text": "The three Unforgivable Curses are the Imperius Curse (Impero — control), the Cruciatus Curse (Crucio — torture), and the Killing Curse (Avada Kedavra — instant death). They are called unforgivable because their use carries a life sentence in Azkaban. Each requires genuine intent and magical power to cast effectively — you cannot truly cast them without meaning them.",
+    "source": "Magical Law — Unforgivable Curses",
+    "language": "general",
+    "character_id": ""
+  }
+]
